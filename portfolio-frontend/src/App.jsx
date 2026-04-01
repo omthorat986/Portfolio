@@ -11,8 +11,11 @@ function App() {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
+    const apiBase = import.meta.env.VITE_API_BASE_URL || '/api';
+    const projectsEndpoint = `${apiBase.replace(/\/$/, '')}/projects`;
+
       // Fetch project data from existing API endpoint
-    fetch('/api/projects')
+    fetch(projectsEndpoint)
       .then((res) => res.json())
       .then((data) => {
         if (data && data.data && data.data.length > 0) {
