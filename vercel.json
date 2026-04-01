@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "cd portfolio-frontend && npm run build",
+  "outputDirectory": "portfolio-frontend/dist",
+  "framework": "vite"
+}
