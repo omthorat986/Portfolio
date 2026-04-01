@@ -1,12 +1,14 @@
 .ripped-note {
-  background-color: #fff9c4; /* classic yellow post-it/notepad color */
+  background: linear-gradient(165deg, #fff6bc 0%, #fbeaa7 100%);
   padding: 20px;
   position: relative;
   min-height: 220px;
   display: flex;
   flex-direction: column;
-  box-shadow: 2px 4px 10px rgba(0,0,0,0.1);
-  color: #333;
+  box-shadow: 0 14px 24px rgba(31, 36, 48, 0.14);
+  color: #1f2430;
+  border-radius: 12px;
+  border: 1px solid rgba(31, 36, 48, 0.08);
 }
 
 /* The torn edge effect at the bottom */
@@ -22,25 +24,25 @@
 }
 
 .note-content h3 {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Fraunces', Georgia, serif;
   margin: 0 0 5px;
   font-size: 1.3rem;
-  border-bottom: 1px dashed rgba(0,0,0,0.2);
+  border-bottom: 1px dashed rgba(31, 36, 48, 0.25);
   padding-bottom: 5px;
 }
 
 .role-tag {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 0.85rem;
   font-weight: bold;
-  color: #b71c1c; /* red marker pen look */
+  color: #b23a1f;
   margin: 0;
 }
 
 .note-body {
   margin-top: 15px;
-  font-family: 'Comic Sans MS', 'Marker Felt', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1rem;
   line-height: 1.4;
-  color: #1a237e; /* blue pen look */
+  color: #25346b;
 }

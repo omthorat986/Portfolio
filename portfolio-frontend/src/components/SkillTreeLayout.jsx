@@ -74,10 +74,10 @@ export default function SkillTreeLayout() {
       
       <div className="skill-tree-container">
         {/* SVG background connections */}
-        <svg className="skill-connections" viewBox="0 0 400 600" preserveAspectRatio="none">
+        <svg className="skill-connections" viewBox="0 0 400 760" preserveAspectRatio="none">
           <path 
             className={`connection-line ${isVisible ? 'draw-line' : ''}`}
-            d="M 200, 50 C 200, 150 100, 200 100, 300 C 100, 400 300, 450 300, 550" 
+            d="M 200, 85 C 200, 210 100, 250 100, 380 C 100, 500 300, 555 300, 680" 
           />
         </svg>
 

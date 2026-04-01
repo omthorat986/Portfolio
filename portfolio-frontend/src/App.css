@@ -3,6 +3,7 @@
   flex-direction: column;
   width: 100vw;
   overflow-x: hidden;
+  position: relative;
 }
 
 /* Global resets for the new architecture */
@@ -10,4 +11,31 @@ body, html {
   scroll-behavior: smooth;
   margin: 0;
   padding: 0;
+}
+
+.narrative-section {
+  position: relative;
+  z-index: 2;
+  animation: sectionReveal 900ms ease both;
+}
+
+.section-hero { animation-delay: 80ms; }
+.section-skills { animation-delay: 220ms; }
+.section-projects { animation-delay: 360ms; }
+
+@keyframes sectionReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .narrative-section {
+    animation-duration: 700ms;
+  }
 }

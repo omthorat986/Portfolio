@@ -33,6 +33,216 @@
   align-items: center;
 }
 
+.pixel-sprite {
+  position: absolute;
+  top: 18%;
+  right: 8%;
+  width: 58px;
+  height: 58px;
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, #8ce4ff 0%, #4fb0d0 100%);
+  border: 3px solid #1f2430;
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 255, 0.25),
+    0 10px 18px rgba(0, 0, 0, 0.2);
+  image-rendering: pixelated;
+  z-index: 9;
+  animation: spriteFloat 3.4s ease-in-out infinite;
+}
+
+.pixel-sprite::before,
+.pixel-sprite::after {
+  content: "";
+  position: absolute;
+}
+
+.pixel-sprite::before {
+  left: -8px;
+  right: -8px;
+  bottom: -12px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(31, 36, 48, 0.25);
+  filter: blur(2px);
+}
+
+.pixel-sprite::after {
+  top: -7px;
+  left: 9px;
+  width: 40px;
+  height: 10px;
+  border-radius: 6px;
+  background: #ffe59d;
+  border: 2px solid #1f2430;
+}
+
+.sprite-eye {
+  position: absolute;
+  top: 23px;
+  width: 8px;
+  height: 8px;
+  background: #1f2430;
+  border-radius: 2px;
+  animation: spriteBlink 4.5s infinite;
+}
+
+.eye-left { left: 15px; }
+.eye-right { right: 15px; }
+
+.pokeball-orb {
+  position: absolute;
+  left: 7%;
+  top: 22%;
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  border: 3px solid #1f2430;
+  background: linear-gradient(180deg, #f35f5f 0 48%, #1f2430 48% 52%, #fff6f6 52% 100%);
+  box-shadow: 0 10px 18px rgba(31, 36, 48, 0.2);
+  z-index: 8;
+  animation: pokeballBob 4.2s ease-in-out infinite;
+}
+
+.pokeball-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: #fff;
+  border: 3px solid #1f2430;
+}
+
+.minecraft-block {
+  position: absolute;
+  right: 12%;
+  bottom: 18%;
+  width: 62px;
+  height: 62px;
+  border: 3px solid #2d3126;
+  border-radius: 4px;
+  background:
+    linear-gradient(180deg, #66a04d 0 40%, #8a5b34 40% 100%);
+  box-shadow: 0 12px 18px rgba(45, 49, 38, 0.24);
+  z-index: 8;
+  animation: blockPulse 3.6s ease-in-out infinite;
+}
+
+.block-pixel {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.p1 { top: 8px; left: 10px; }
+.p2 { top: 16px; right: 12px; }
+.p3 { bottom: 18px; left: 18px; }
+.p4 { bottom: 8px; right: 8px; }
+
+.race-car {
+  position: absolute;
+  left: 9%;
+  bottom: 14%;
+  width: 86px;
+  height: 22px;
+  border-radius: 12px 16px 8px 10px;
+  border: 2px solid rgba(34, 39, 52, 0.9);
+  background: linear-gradient(90deg, #2c3242 0 55%, #4b556d 55% 100%);
+  box-shadow: 0 8px 14px rgba(27, 31, 42, 0.2);
+  opacity: 0.88;
+  z-index: 8;
+  animation: carIdle 3.2s ease-in-out infinite;
+}
+
+.race-car::before,
+.race-car::after {
+  content: "";
+  position: absolute;
+  border: 2px solid rgba(34, 39, 52, 0.9);
+  background: #394157;
+}
+
+.race-car::before {
+  left: -9px;
+  bottom: 5px;
+  width: 10px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+.race-car::after {
+  right: -6px;
+  top: 3px;
+  width: 6px;
+  height: 14px;
+  border-radius: 2px;
+}
+
+.car-cabin {
+  position: absolute;
+  top: -8px;
+  left: 34px;
+  width: 18px;
+  height: 10px;
+  border-radius: 8px 8px 0 0;
+  background: linear-gradient(180deg, #b8d7ee 0%, #7da2c0 100%);
+  border: 2px solid rgba(34, 39, 52, 0.9);
+  border-bottom: 0;
+}
+
+.car-wheel {
+  position: absolute;
+  bottom: -8px;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #1d2230;
+  border: 2px solid #58627c;
+}
+
+.wheel-front { right: 12px; }
+.wheel-back { left: 12px; }
+
+.car-wheel::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: #9ea8bf;
+}
+
+@keyframes spriteFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes spriteBlink {
+  0%, 44%, 48%, 100% { transform: scaleY(1); }
+  46% { transform: scaleY(0.2); }
+}
+
+@keyframes pokeballBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes blockPulse {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-4px) scale(1.03); }
+}
+
+@keyframes carIdle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
 .flair-dice {
   bottom: 15%;
   left: 10%;
@@ -94,6 +304,55 @@
     flex-direction: column;
     gap: 30px;
   }
+
+  .pixel-sprite {
+    top: 12%;
+    right: 6%;
+    width: 48px;
+    height: 48px;
+  }
+
+  .pokeball-orb {
+    left: 4%;
+    top: 18%;
+    width: 46px;
+    height: 46px;
+  }
+
+  .minecraft-block {
+    right: 6%;
+    bottom: 14%;
+    width: 52px;
+    height: 52px;
+  }
+
+  .race-car {
+    left: 5%;
+    bottom: 10%;
+    width: 72px;
+    height: 20px;
+  }
+
+  .car-cabin {
+    top: -7px;
+    left: 28px;
+    width: 15px;
+    height: 9px;
+  }
+
+  .car-wheel {
+    width: 12px;
+    height: 12px;
+    bottom: -7px;
+  }
+
+  .sprite-eye {
+    top: 19px;
+  }
+
+  .eye-left { left: 12px; }
+  .eye-right { right: 12px; }
+
   .hero-left {
     height: 300px;
     width: 100%;

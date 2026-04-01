@@ -1,12 +1,19 @@
 .polaroid {
-  background-color: #ffffff;
+  background-color: #fffdf8;
   padding: 15px 15px 40px 15px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 16px 28px rgba(31, 36, 48, 0.15), 0 4px 10px rgba(31, 36, 48, 0.08);
   display: flex;
   flex-direction: column;
   height: 100%;
   min-height: 280px;
-  border-radius: 2px;
+  border-radius: 10px;
+  border: 1px solid rgba(31, 36, 48, 0.08);
+  transition: transform 240ms ease, box-shadow 240ms ease;
+}
+
+.polaroid:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 34px rgba(31, 36, 48, 0.2), 0 6px 14px rgba(31, 36, 48, 0.1);
 }
 
 .polaroid-image {
@@ -39,29 +46,31 @@
 
 .polaroid-caption h3 {
   margin: 0;
-  font-family: 'Comic Sans MS', 'Marker Felt', sans-serif; /* simple handwritten vibe fallback */
+  font-family: 'Fraunces', Georgia, serif;
   font-size: 1.2rem;
-  color: #333;
+  color: #1f2430;
 }
 
 .polaroid-caption p {
   margin: 5px 0 10px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 0.8rem;
-  color: #666;
+  color: #596274;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
 }
 
 .polaroid-caption a {
-  font-family: 'Comic Sans MS', 'Marker Felt', sans-serif;
-  color: #0984e3;
+  font-family: 'Space Grotesk', sans-serif;
+  color: #0b6e99;
   text-decoration: none;
   font-size: 0.9rem;
   border-bottom: 2px solid transparent;
-  transition: border-bottom 0.2s;
+  transition: border-bottom 0.2s, color 0.2s;
+  font-weight: 600;
 }
 
 .polaroid-caption a:hover {
-  border-bottom: 2px solid #0984e3;
+  border-bottom: 2px solid #ff6b35;
+  color: #ff6b35;
 }

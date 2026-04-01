@@ -62,15 +62,21 @@ function App() {
       <BackgroundRocket />
 
       {/* Section 1: The Profile Hero */}
-      <ProfileHero />
+      <section className="narrative-section section-hero">
+        <ProfileHero />
+      </section>
 
       {/* Section 2: Experience Timeline */}
-      <SkillTreeLayout />
+      <section className="narrative-section section-skills">
+        <SkillTreeLayout />
+      </section>
 
       {/* Section 3: The Project Bento Grid */}
-      <DesktopLayout projects={projects}>
-        {renderProjectsAsArtifacts()}
-      </DesktopLayout>
+      <section className="narrative-section section-projects">
+        <DesktopLayout projects={projects}>
+          {renderProjectsAsArtifacts()}
+        </DesktopLayout>
+      </section>
     </div>
   );
 }
