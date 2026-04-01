@@ -1,0 +1,67 @@
+.polaroid {
+  background-color: #ffffff;
+  padding: 15px 15px 40px 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 280px;
+  border-radius: 2px;
+}
+
+.polaroid-image {
+  flex: 1;
+  background-color: #e0e0e0;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  position: relative;
+}
+
+.polaroid-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-icon {
+  font-size: 2rem;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+.polaroid-caption {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.polaroid-caption h3 {
+  margin: 0;
+  font-family: 'Comic Sans MS', 'Marker Felt', sans-serif; /* simple handwritten vibe fallback */
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.polaroid-caption p {
+  margin: 5px 0 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.8rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.polaroid-caption a {
+  font-family: 'Comic Sans MS', 'Marker Felt', sans-serif;
+  color: #0984e3;
+  text-decoration: none;
+  font-size: 0.9rem;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 0.2s;
+}
+
+.polaroid-caption a:hover {
+  border-bottom: 2px solid #0984e3;
+}

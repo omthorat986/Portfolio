@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Developer Portfolio | Split Screen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="layout-shell">
+      <aside class="sidebar" aria-label="Developer profile">
+        <div class="sidebar-inner">
+          <p class="eyebrow">AVAILABLE FOR GAMEPLAY ENGINEERING</p>
+          <h1 class="developer-name">OM Developer</h1>
+          <p class="developer-summary">
+            Gameplay programmer focused on responsive player systems, engine-level optimization, and data-driven iteration.
+          </p>
+          <ul class="contact-list">
+            <li><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="mailto:hello@example.com">hello@example.com</a></li>
+          </ul>
+          <section class="resume-stats" aria-label="Highlights">
+            <p><span>6+</span> shipped prototypes</p>
+            <p><span>3</span> engines in production workflow</p>
+            <p><span>100k+</span> simulated entities in stress tests</p>
+          </section>
+        </div>
+      </aside>
+
+      <main class="project-feed" aria-label="Project feed">
+        <header class="feed-header">
+          <h2>Project Experience</h2>
+          <p id="project-count">Loading projects...</p>
+        </header>
+
+        <section id="project-list" class="project-list"></section>
+      </main>
+    </div>
+
+    <section id="ai-guide" class="ai-guide" aria-label="AI companion guide">
+      <header class="guide-header">
+        <h3>AI Guide</h3>
+        <button id="guide-mic" type="button" aria-label="Speak your question">Mic</button>
+      </header>
+      <div id="guide-messages" class="guide-messages" aria-live="polite"></div>
+      <form id="guide-form" class="guide-form">
+        <input
+          id="guide-input"
+          name="question"
+          type="text"
+          placeholder="Ask about roles, engines, or project outcomes"
+          autocomplete="off"
+        />
+        <button type="submit">Ask</button>
+      </form>
+    </section>
+
+    <script type="module" src="/js/frontend.js"></script>
+  </body>
+</html>

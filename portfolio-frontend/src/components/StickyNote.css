@@ -1,0 +1,68 @@
+.sticky-note {
+  width: 200px;
+  height: 200px;
+  background-color: rgba(241, 196, 15, 0.9); /* bright yellow post-it with transparency */
+  backdrop-filter: blur(8px);
+  position: relative;
+  padding: 20px;
+  transform: rotate(-12deg);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s;
+  box-shadow: 
+    5px 10px 20px rgba(0,0,0,0.25),
+    inset -10px -10px 15px rgba(0,0,0,0.05);
+  cursor: pointer;
+  z-index: 12;
+}
+
+.sticky-note::after {
+  /* Curl effect at the bottom right cornerr */
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(-135deg, transparent 50%, rgba(0,0,0,0.1) 50%);
+  border-bottom-right-radius: 4px;
+}
+
+.sticky-note:hover {
+  transform: rotate(0deg) scale(1.05) translateY(-5px);
+  z-index: 30;
+}
+
+.sticky-pin {
+  width: 12px;
+  height: 12px;
+  background-color: #e74c3c;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 
+    inset -2px -2px 4px rgba(0,0,0,0.3),
+    1px 2px 3px rgba(0,0,0,0.4);
+}
+
+.sticky-content h3 {
+  margin: 15px 0 10px;
+  font-family: 'Comic Sans MS', 'Marker Felt', sans-serif;
+  color: #c0392b; /* Red marker */
+  text-decoration: underline;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+.sticky-content p {
+  font-family: 'Comic Sans MS', 'Marker Felt', sans-serif;
+  color: #34495e;
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+
+.sticky-signature {
+  text-align: right;
+  font-weight: bold;
+  margin-top: 15px !important;
+}

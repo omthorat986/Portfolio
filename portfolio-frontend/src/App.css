@@ -1,0 +1,13 @@
+.narrative-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Global resets for the new architecture */
+body, html {
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+}

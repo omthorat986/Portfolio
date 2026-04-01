@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --desk-bg: #eceadd;
+  --text-main: #2a2a2a;
+  --text-muted: #5a5a5a;
+  --terminal-bg: #1e1e1e;
+  --terminal-text: #00ff00;
+  --accent-color: #ff3366;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--desk-bg);
+  /* Aesthetic touch: SVG Grain Texture overlay */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--desk-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #c1bba8;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a39c87;
+}
+
+/* Typography classes */
+.font-mono {
+  font-family: 'Fira Code', monospace;
+}

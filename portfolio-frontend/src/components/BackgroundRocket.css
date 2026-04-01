@@ -1,0 +1,27 @@
+.rocket-container {
+  position: fixed;
+  bottom: -100px;
+  left: -100px;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.rocket-sprite {
+  position: absolute;
+  /* Start bottom left, animate to top right */
+  animation: flyBy 30s linear infinite;
+  opacity: 0.5;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+}
+
+@keyframes flyBy {
+  0% {
+    transform: translate(-50px, 120vh) rotate(45deg) scale(0.8);
+  }
+  100% {
+    transform: translate(120vw, -10px) rotate(45deg) scale(0.8);
+  }
+}

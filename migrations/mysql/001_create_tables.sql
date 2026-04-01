@@ -1,0 +1,29 @@
+START TRANSACTION;
+
+CREATE TABLE IF NOT EXISTS portfolio_projects (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  title VARCHAR(200) NOT NULL,
+  engine_used VARCHAR(100) NOT NULL,
+  role VARCHAR(100) NOT NULL,
+  video_url TEXT NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS visitor_analytics (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  event_type VARCHAR(64) NOT NULL,
+  page_path VARCHAR(255) NOT NULL,
+  referrer TEXT,
+  user_agent TEXT,
+  session_id VARCHAR(128),
+  metadata JSON,
+  occurred_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  INDEX idx_visitor_analytics_occurred_at (occurred_at),
+  INDEX idx_visitor_analytics_event_type (event_type)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+COMMIT;

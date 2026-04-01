@@ -1,0 +1,98 @@
+.skills-clipboard {
+  width: 320px;
+  min-height: 400px;
+  background-color: #8b5a2b; /* Brown wooden clipboard color */
+  border-radius: 8px;
+  position: relative;
+  padding: 25px 15px 15px 15px;
+  transform: rotate(-2deg);
+  transition: transform 0.3s;
+  box-shadow: 
+    4px 10px 15px rgba(0,0,0,0.3),
+    inset 0 0 10px rgba(0,0,0,0.4);
+  z-index: 5;
+}
+
+.skills-clipboard:hover {
+  transform: rotate(0deg) translateY(-5px);
+  z-index: 15;
+}
+
+.clipboard-clip {
+  width: 120px;
+  height: 40px;
+  background-color: #bdc3c7; /* Silver metal clip */
+  border-radius: 5px;
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 
+    0 5px 10px rgba(0,0,0,0.4),
+    inset 0 2px 5px rgba(255,255,255,0.7);
+  z-index: 10;
+}
+
+.clipboard-clip::after {
+  content: '';
+  width: 80px;
+  height: 10px;
+  background-color: #7f8c8d;
+  position: absolute;
+  bottom: 5px;
+  left: 20px;
+  border-radius: 2px;
+}
+
+.clipboard-paper {
+  background-color: #fdfbf7; /* Off-white printer paper */
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+  padding: 30px 20px 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.skills-title {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #2c3e50;
+  border-bottom: 2px dashed #bdc3c7;
+  padding-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.skills-category {
+  margin-bottom: 25px;
+}
+
+.skills-category h3 {
+  font-size: 1rem;
+  color: #c0392b; /* Red marker accent */
+  margin: 0 0 10px;
+}
+
+.skills-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-item {
+  background-color: #ecf0f1;
+  color: #34495e;
+  padding: 4px 10px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border-radius: 4px;
+  border: 1px solid #bdc3c7;
+  display: inline-block;
+}

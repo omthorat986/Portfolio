@@ -1,0 +1,101 @@
+.profile-hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  /* Override padding for centered flex layout */
+  padding: 0;
+}
+
+.hero-content {
+  display: flex;
+  gap: 50px;
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 40px;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.hero-left {
+  flex: 2;
+  max-width: 700px;
+  height: 350px;
+}
+
+.hero-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flair-dice {
+  bottom: 15%;
+  left: 10%;
+  width: 80px;
+  height: 80px;
+  /* Placeholder URL for polyhedral dice */
+  background-image: radial-gradient(circle, #e74c3c 0%, transparent 60%);
+  animation-delay: -2s;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.6;
+}
+
+.scroll-indicator p {
+  font-family: 'Courier New', Courier, monospace;
+  margin: 0;
+  color: #555;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.mouse {
+  width: 24px;
+  height: 36px;
+  border: 2px solid #555;
+  border-radius: 12px;
+  position: relative;
+}
+
+.wheel {
+  width: 4px;
+  height: 6px;
+  background-color: #555;
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollWheel 2s infinite ease-in-out;
+}
+
+@keyframes scrollWheel {
+  0% { transform: translate(-50%, 0); opacity: 1; }
+  100% { transform: translate(-50%, 15px); opacity: 0; }
+}
+
+@media (max-width: 900px) {
+  .hero-content {
+    flex-direction: column;
+    gap: 30px;
+  }
+  .hero-left {
+    height: 300px;
+    width: 100%;
+  }
+}
