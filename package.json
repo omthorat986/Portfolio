@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
+    "build": "cd portfolio-frontend && npm install && npm run build",
     "seed": "node src/db/seed.js"
   },
   "keywords": [
