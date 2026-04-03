@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const projectsRouter = require('./routes/projects');
 const analyticsRouter = require('./routes/analytics');
 
@@ -43,11 +44,35 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
-app.use((req, res) => {
+const frontendDistPath = path.resolve(__dirname, '../portfolio-frontend/dist');
+const frontendIndexPath = path.join(frontendDistPath, 'index.html');
+
+if (fs.existsSync(frontendIndexPath)) {
+  app.use(express.static(frontendDistPath));
+
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api') || req.path === '/health') {
+      return next();
+    }
+
+    return res.sendFile(frontendIndexPath);
+  });
+}
+
+app.use('/api/*', (req, res) => {
   res.status(404).json({
     error: {
       code: 'NOT_FOUND',
       message: 'Route not found.'
+    }
+  });
+});
+
+app.use((req, res) => {
+  res.status(404).json({
+    error: {
+      code: 'NOT_FOUND',
+      message: 'Frontend build not found. Run "npm run build" in portfolio-frontend or start Vite dev server.'
     }
   });
 });
