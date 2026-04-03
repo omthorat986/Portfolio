@@ -1,6 +1,7 @@
 .sticky-note {
-  width: 200px;
-  height: 200px;
+  width: min(100%, 220px);
+  min-height: 200px;
+  height: auto;
   background-color: rgba(241, 196, 15, 0.9); /* bright yellow post-it with transparency */
   backdrop-filter: blur(8px);
   position: relative;
@@ -65,4 +66,20 @@
   text-align: right;
   font-weight: bold;
   margin-top: 15px !important;
+}
+
+@media (max-width: 700px) {
+  .sticky-note {
+    transform: rotate(0deg);
+    margin: 0 auto;
+    padding: 16px;
+  }
+
+  .sticky-content h3 {
+    font-size: 1.05rem;
+  }
+
+  .sticky-content p {
+    font-size: 0.9rem;
+  }
 }

@@ -1,6 +1,7 @@
 .floppy-disk {
-  width: 200px;
-  height: 200px;
+  width: min(100%, 200px);
+  aspect-ratio: 1 / 1;
+  height: auto;
   background-color: #2c3e50; /* Dark plastic */
   border-radius: 4px;
   position: relative;
@@ -103,4 +104,16 @@
   position: absolute;
   bottom: 10px;
   right: 10px;
+}
+
+@media (max-width: 700px) {
+  .floppy-disk {
+    transform: rotate(0deg);
+    margin: 0 auto;
+  }
+
+  .floppy-shutter {
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }

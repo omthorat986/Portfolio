@@ -1,8 +1,9 @@
 .studio-badge {
   background-color: #f8f9fa;
   border-radius: 8px;
-  width: 260px;
-  height: 400px;
+  width: min(100%, 260px);
+  min-height: 400px;
+  height: auto;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -127,4 +128,15 @@
   font-size: 0.7rem;
   font-weight: bold;
   color: #333;
+}
+
+@media (max-width: 700px) {
+  .studio-badge {
+    transform: rotate(0deg);
+    margin: 0 auto;
+  }
+
+  .badge-name {
+    font-size: 1.45rem;
+  }
 }
