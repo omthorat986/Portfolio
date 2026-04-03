@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap');
 
 :root {
-  --desk-bg: #f4efdf;
-  --paper: #fffaf0;
-  --ink: #1f2430;
-  --ink-muted: #4d5566;
-  --terminal-bg: #1a1f2a;
-  --terminal-text: #77f3a8;
-  --accent-color: #ff6b35;
-  --accent-alt: #0b6e99;
-  --line-soft: #d9d2be;
+  --desk-bg: #eee7d7;
+  --paper: #fffaf3;
+  --ink: #202635;
+  --ink-muted: #586072;
+  --terminal-bg: #171c26;
+  --terminal-text: #79f0ae;
+  --accent-color: #e1673a;
+  --accent-alt: #0d6f94;
+  --line-soft: #d8cfbd;
 }
 
 * {
@@ -21,15 +21,16 @@ body {
   padding: 0;
   background-color: var(--desk-bg);
   background-image:
-    radial-gradient(circle at 10% 8%, rgba(255, 107, 53, 0.16), transparent 38%),
-    radial-gradient(circle at 86% 20%, rgba(11, 110, 153, 0.16), transparent 42%),
-    linear-gradient(180deg, #f8f3e7 0%, #efe7d4 100%),
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E");
+    radial-gradient(circle at 10% 8%, rgba(225, 103, 58, 0.16), transparent 34%),
+    radial-gradient(circle at 86% 20%, rgba(13, 111, 148, 0.16), transparent 38%),
+    linear-gradient(180deg, #f8f3e9 0%, #ede3d0 100%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
   background-attachment: fixed;
   font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
   color: var(--ink);
   overflow-x: hidden;
   line-height: 1.5;
+  text-rendering: optimizeLegibility;
 }
 
 /* Custom Scrollbar for premium feel */
@@ -62,6 +63,6 @@ p {
 }
 
 ::selection {
-  background: rgba(255, 107, 53, 0.25);
+  background: rgba(225, 103, 58, 0.26);
   color: #111;
 }

@@ -1,5 +1,5 @@
 .ripped-note {
-  background: linear-gradient(165deg, #fff6bc 0%, #fbeaa7 100%);
+  background: linear-gradient(165deg, #fff8c8 0%, #f6e59a 100%);
   padding: 20px;
   position: relative;
   min-height: 220px;
@@ -35,7 +35,7 @@
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.85rem;
   font-weight: bold;
-  color: #b23a1f;
+  color: #a94519;
   margin: 0;
 }
 
@@ -44,5 +44,5 @@
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1rem;
   line-height: 1.4;
-  color: #25346b;
+  color: #25345f;
 }

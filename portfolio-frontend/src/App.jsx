@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProfileHero from './components/ProfileHero';
 import SkillTreeLayout from './components/SkillTreeLayout';
 import DesktopLayout from './components/DesktopLayout';
@@ -7,37 +7,60 @@ import RippedNote from './components/RippedNote';
 import BackgroundRocket from './components/BackgroundRocket';
 import './App.css';
 
+const featuredFallbackProjects = [
+  { id: 1, title: 'Project: OVERDRIVE', role: 'Engine Architecture', engineUsed: 'C++ / Direct3D' },
+  { id: 2, title: 'Nebula Tactics', role: 'AI Programming', engineUsed: 'Unity' },
+];
+
 function App() {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState(featuredFallbackProjects);
+  const [loadState, setLoadState] = useState('loading');
 
   useEffect(() => {
     const apiBase = import.meta.env.VITE_API_BASE_URL || '/api';
     const projectsEndpoint = `${apiBase.replace(/\/$/, '')}/projects`;
+    const controller = new AbortController();
 
-      // Fetch project data from existing API endpoint
-    fetch(projectsEndpoint)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data && data.data && data.data.length > 0) {
-          setProjects(data.data);
-        } else {
-          // Provide highly thematic dummy placeholders if API is empty
-          setProjects([
-            { id: 1, title: 'Project: OVERDRIVE', role: 'Engine Arch.', engineUsed: 'C++ / Direct3D' },
-            { id: 2, title: 'Nebula Tactics', role: 'AI Programmer', engineUsed: 'Unity' }
-          ]);
+    async function loadProjects() {
+      try {
+        const response = await fetch(projectsEndpoint, {
+          signal: controller.signal,
+          headers: {
+            Accept: 'application/json',
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}`);
         }
-      })
-      .catch((err) => {
-        console.error('Error fetching projects:', err);
-        setProjects([
-            { id: 1, title: 'Project: OVERDRIVE', role: 'Engine Arch.', engineUsed: 'C++ / Direct3D' },
-            { id: 2, title: 'Nebula Tactics', role: 'AI Programmer', engineUsed: 'Unity' }
-        ]);
-      });
+
+        const data = await response.json();
+        const nextProjects = Array.isArray(data?.data) && data.data.length > 0
+          ? data.data
+          : featuredFallbackProjects;
+
+        if (!controller.signal.aborted) {
+          setProjects(nextProjects);
+          setLoadState(Array.isArray(data?.data) && data.data.length > 0 ? 'ready' : 'fallback');
+        }
+      } catch (error) {
+        if (controller.signal.aborted) {
+          return;
+        }
+
+        console.error('Error fetching projects:', error);
+        setProjects(featuredFallbackProjects);
+        setLoadState('fallback');
+      }
+    }
+
+    loadProjects();
+
+    return () => controller.abort();
   }, []);
 
-  // Map projects as physical objects
+  const dataLabel = loadState === 'loading' ? 'loading' : loadState === 'ready' ? 'live data' : 'fallback set';
+
   const renderProjectsAsArtifacts = () => {
     return projects.map((proj, idx) => {
       if (idx % 2 === 0) {
@@ -58,20 +81,41 @@ function App() {
 
   return (
     <div className="narrative-layout">
-      {/* Background layer */}
+      <header className="portfolio-intro">
+        <div className="intro-copy">
+          <p className="intro-eyebrow">Interactive portfolio</p>
+          <h1>Game systems, presented like a curated desktop exhibit.</h1>
+          <p className="intro-summary">
+            A tactile portfolio built around polished UI layers, game-inspired details, and live project data.
+          </p>
+        </div>
+
+        <div className="intro-metrics" aria-label="Portfolio summary">
+          <div className="metric-card">
+            <span className="metric-value">{projects.length}</span>
+            <span className="metric-label">featured projects</span>
+          </div>
+          <div className="metric-card">
+            <span className="metric-value">3</span>
+            <span className="metric-label">story sections</span>
+          </div>
+          <div className="metric-card">
+            <span className="metric-value">{dataLabel}</span>
+            <span className="metric-label">project source</span>
+          </div>
+        </div>
+      </header>
+
       <BackgroundRocket />
 
-      {/* Section 1: The Profile Hero */}
       <section className="narrative-section section-hero">
         <ProfileHero />
       </section>
 
-      {/* Section 2: Experience Timeline */}
       <section className="narrative-section section-skills">
         <SkillTreeLayout />
       </section>
 
-      {/* Section 3: The Project Bento Grid */}
       <section className="narrative-section section-projects">
         <DesktopLayout projects={projects}>
           {renderProjectsAsArtifacts()}

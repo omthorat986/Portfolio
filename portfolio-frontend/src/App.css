@@ -5,9 +5,78 @@
   max-width: 100%;
   overflow-x: hidden;
   position: relative;
+  padding: clamp(18px, 2.4vw, 32px);
 }
 
-/* Global resets for the new architecture */
+.portfolio-intro {
+  width: min(100%, 1400px);
+  margin: 0 auto clamp(18px, 2vw, 28px);
+  padding: clamp(20px, 3vw, 32px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(260px, 0.9fr);
+  gap: clamp(18px, 2.2vw, 32px);
+  align-items: center;
+  border: 1px solid rgba(31, 36, 48, 0.1);
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(255, 250, 240, 0.88), rgba(248, 242, 228, 0.76));
+  backdrop-filter: blur(14px);
+  box-shadow: 0 24px 48px rgba(31, 36, 48, 0.08);
+}
+
+.intro-copy h1 {
+  margin: 0;
+  max-width: 12ch;
+  font-size: clamp(2.4rem, 5vw, 4.75rem);
+  line-height: 0.95;
+}
+
+.intro-eyebrow {
+  margin: 0 0 10px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8c5a37;
+}
+
+.intro-summary {
+  max-width: 62ch;
+  margin: 14px 0 0;
+  font-size: 1.03rem;
+}
+
+.intro-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.metric-card {
+  min-height: 132px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(31, 36, 48, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+.metric-value {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  color: var(--ink);
+}
+
+.metric-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
 body, html {
   scroll-behavior: smooth;
   margin: 0;
@@ -18,6 +87,7 @@ body, html {
   position: relative;
   z-index: 2;
   animation: sectionReveal 900ms ease both;
+  scroll-margin-top: 24px;
 }
 
 .section-hero { animation-delay: 80ms; }
@@ -36,6 +106,24 @@ body, html {
 }
 
 @media (max-width: 768px) {
+  .narrative-layout {
+    padding: 12px;
+  }
+
+  .portfolio-intro {
+    grid-template-columns: 1fr;
+    border-radius: 22px;
+    padding: 18px;
+  }
+
+  .intro-copy h1 {
+    max-width: none;
+  }
+
+  .intro-metrics {
+    grid-template-columns: 1fr;
+  }
+
   .narrative-section {
     animation-duration: 700ms;
   }

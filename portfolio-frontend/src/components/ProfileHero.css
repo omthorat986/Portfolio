@@ -5,25 +5,29 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  /* Override padding for centered flex layout */
-  padding: 0;
+  padding: clamp(36px, 5vw, 64px) 0 84px;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.5), transparent 30%),
+    radial-gradient(circle at 85% 20%, rgba(225, 103, 58, 0.14), transparent 26%),
+    radial-gradient(circle at 15% 80%, rgba(13, 111, 148, 0.12), transparent 28%);
 }
 
 .hero-content {
   display: flex;
-  gap: 50px;
-  max-width: 1200px;
+  gap: clamp(24px, 4vw, 48px);
+  max-width: 1240px;
   width: 100%;
-  padding: 0 40px;
+  padding: 0 clamp(18px, 4vw, 40px);
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   z-index: 10;
 }
 
 .hero-left {
   flex: 2;
-  max-width: 700px;
-  height: 350px;
+  max-width: 720px;
+  height: clamp(280px, 38vw, 380px);
 }
 
 .hero-right {
@@ -267,7 +271,7 @@
 .scroll-indicator p {
   font-family: 'Courier New', Courier, monospace;
   margin: 0;
-  color: #555;
+  color: var(--ink-muted);
   font-weight: bold;
   text-transform: uppercase;
   font-size: 0.8rem;
@@ -307,7 +311,7 @@
 
   .hero-content {
     flex-direction: column;
-    gap: 30px;
+    gap: 24px;
     padding: 0 18px;
   }
 

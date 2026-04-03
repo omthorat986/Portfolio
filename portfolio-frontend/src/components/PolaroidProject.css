@@ -6,6 +6,7 @@
   flex-direction: column;
   height: 100%;
   min-height: 280px;
+  aspect-ratio: 4 / 5;
   border-radius: 10px;
   border: 1px solid rgba(31, 36, 48, 0.08);
   transition: transform 240ms ease, box-shadow 240ms ease;
@@ -18,7 +19,8 @@
 
 .polaroid-image {
   flex: 1;
-  background-color: #e0e0e0;
+  min-height: 180px;
+  background-color: #dfe3ea;
   overflow: hidden;
   border: 1px solid #ddd;
   position: relative;
@@ -62,11 +64,11 @@
 
 .polaroid-caption a {
   font-family: 'Space Grotesk', sans-serif;
-  color: #0b6e99;
+  color: #0d6f94;
   text-decoration: none;
   font-size: 0.9rem;
   border-bottom: 2px solid transparent;
-  transition: border-bottom 0.2s, color 0.2s;
+  transition: border-bottom 0.2s, color 0.2s, transform 0.2s;
   font-weight: 600;
 }
 

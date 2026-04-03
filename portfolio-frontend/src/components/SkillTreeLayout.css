@@ -2,32 +2,32 @@
   width: 100%;
   max-width: 100%;
   min-height: 920px;
-  background-color: #fafbfc;
+  background-color: #f7f8fb;
   background-image: 
-    linear-gradient(#add8e6 1px, transparent 1px),
-    linear-gradient(90deg, #add8e6 1px, transparent 1px);
-  background-size: 40px 40px; /* Graph paper lines */
+    linear-gradient(rgba(125, 159, 190, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 159, 190, 0.18) 1px, transparent 1px);
+  background-size: 40px 40px;
   position: relative;
   padding: clamp(52px, 7vw, 80px) 20px;
   overflow: visible;
-  box-shadow: inset 0 20px 40px rgba(0,0,0,0.05); /* shadow from desk */
+  box-shadow: inset 0 20px 40px rgba(0,0,0,0.05);
 }
 
 .graph-title {
   text-align: center;
-  font-family: 'Courier New', Courier, monospace;
-  color: #2c3e50;
+  font-family: 'IBM Plex Mono', 'Courier New', Courier, monospace;
+  color: #24384a;
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: 60px;
-  background: white;
+  background: rgba(255, 255, 255, 0.92);
   display: inline-block;
   padding: 10px 20px;
-  border: 2px solid #add8e6;
+  border: 1px solid rgba(44, 62, 80, 0.18);
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
 }
 
 .skill-tree-container {
@@ -70,12 +70,12 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  background: white;
+  background: rgba(255, 255, 255, 0.94);
   padding: 15px;
-  border: 2px solid #34495e;
-  border-radius: 8px;
+  border: 1px solid rgba(52, 73, 94, 0.25);
+  border-radius: 16px;
   width: 340px;
-  box-shadow: 4px 4px 0 #34495e;
+  box-shadow: 0 14px 30px rgba(52, 73, 94, 0.12);
   z-index: 2;
   opacity: 0;
   transform: translateY(20px);
@@ -119,7 +119,7 @@
 .node-icon {
   width: 40px;
   height: 40px;
-  background-color: #34495e;
+  background: linear-gradient(180deg, #33495e, #243649);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -132,7 +132,7 @@
 }
 
 .node-active .node-icon, .node-active-delay-1 .node-icon, .node-active-delay-2 .node-icon {
-  background-color: #e74c3c;
+  background: linear-gradient(180deg, #ef6b55, #d94d39);
   box-shadow: 0 0 15px rgba(231, 76, 60, 0.6);
   transition: background-color 0.5s, box-shadow 0.5s;
   transition-delay: inherit;
@@ -141,14 +141,14 @@
 .node-content h3 {
   margin: 0 0 5px;
   font-size: 1.1rem;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
   color: #2c3e50;
 }
 
 .node-content p {
   margin: 0;
   font-size: 0.8rem;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'IBM Plex Mono', 'Courier New', Courier, monospace;
   color: #7f8c8d;
 }
 

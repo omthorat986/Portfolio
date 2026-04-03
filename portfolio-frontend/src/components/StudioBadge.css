@@ -1,6 +1,6 @@
 .studio-badge {
-  background-color: #f8f9fa;
-  border-radius: 8px;
+  background: linear-gradient(180deg, #fbfcfd 0%, #f2f4f7 100%);
+  border-radius: 18px;
   width: min(100%, 260px);
   min-height: 400px;
   height: auto;
@@ -8,11 +8,11 @@
   flex-direction: column;
   position: relative;
   box-shadow: 
-    0 15px 35px rgba(0,0,0,0.2), 
-    0 5px 15px rgba(0,0,0,0.1),
+    0 18px 40px rgba(0,0,0,0.18), 
+    0 8px 18px rgba(0,0,0,0.08),
     inset 0 0 20px rgba(0,0,0,0.02);
-  border: 1px solid #e0e0e0;
-  transform: rotate(3deg);
+  border: 1px solid rgba(31, 36, 48, 0.08);
+  transform: rotate(2deg);
   transition: transform 0.3s;
   z-index: 10;
 }
@@ -33,7 +33,7 @@
 }
 
 .badge-header {
-  background-color: #d32f2f; /* Studio color */
+  background: linear-gradient(90deg, #d94949, #b93131);
   color: white;
   padding: 8px 15px;
   display: flex;
@@ -54,8 +54,8 @@
 .badge-photo-placeholder {
   width: 140px;
   height: 140px;
-  background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
-  border: 3px solid #ccc;
+  background: linear-gradient(135deg, #e6e7ea 0%, #f8fafc 100%);
+  border: 3px solid #d2d7de;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,7 +87,7 @@
   font-family: 'Helvetica Neue', Helvetica, arial, sans-serif;
   font-size: 0.85rem;
   font-weight: 700;
-  color: #e74c3c;
+  color: #b9322e;
   text-transform: uppercase;
 }
 

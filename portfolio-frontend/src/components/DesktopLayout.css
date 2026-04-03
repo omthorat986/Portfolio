@@ -1,9 +1,11 @@
 .desk-environment {
   width: 100%;
   min-height: 100vh;
-  /* subtle, textured off-white desk surface without the heavy SVG noise */
-  background-color: #f0eee5;
-  background-image: radial-gradient(circle at 10% 20%, #ebe8df 0%, transparent 60%);
+  background-color: #efe9da;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.6) 0%, transparent 45%),
+    radial-gradient(circle at 90% 10%, rgba(225, 103, 58, 0.08) 0%, transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(0, 0, 0, 0.02));
   padding: clamp(18px, 3vw, 40px);
   position: relative;
   overflow-x: hidden;
@@ -17,24 +19,30 @@
   max-width: 1400px;
   margin: 0 auto;
   position: relative;
+  align-items: start;
 }
 
 .bento-item {
   position: relative;
   z-index: 10;
   transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex;
 }
 
 /* Organic rotations on hover or default */
 .bento-item:nth-child(even) {
-  transform: rotate(1.5deg);
+  transform: rotate(1deg);
 }
 .bento-item:nth-child(odd) {
-  transform: rotate(-1deg);
+  transform: rotate(-0.75deg);
 }
 .bento-item:hover {
   transform: translateY(-5px) scale(1.02) rotate(0deg);
   z-index: 20;
+}
+
+.bento-item > * {
+  width: 100%;
 }
 
 .terminal-area {
@@ -56,18 +64,16 @@
 }
 
 .flair-coffee {
-  top: -20px;
-  right: -50px;
-  /* Placeholder URL until we have a real asset */
-  background-image: radial-gradient(circle, #8d6e63 0%, transparent 70%);
+  top: -14px;
+  right: -46px;
+  background-image: radial-gradient(circle, rgba(141, 110, 99, 0.95) 0%, transparent 70%);
   animation-delay: 0s;
 }
 
 .flair-keyboard {
-  bottom: 100px;
-  left: -80px;
-  /* Placeholder URL */
-  background-image: radial-gradient(circle, #cfd8dc 0%, transparent 70%);
+  bottom: 90px;
+  left: -76px;
+  background-image: radial-gradient(circle, rgba(207, 216, 220, 0.95) 0%, transparent 70%);
   animation-delay: -3s;
 }
 
