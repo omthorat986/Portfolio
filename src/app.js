@@ -44,11 +44,14 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
+const frontendDocsPath = path.resolve(__dirname, '../portfolio-frontend/docs');
 const frontendDistPath = path.resolve(__dirname, '../portfolio-frontend/dist');
-const frontendIndexPath = path.join(frontendDistPath, 'index.html');
+const frontendIndexPath = fs.existsSync(path.join(frontendDocsPath, 'index.html'))
+  ? path.join(frontendDocsPath, 'index.html')
+  : path.join(frontendDistPath, 'index.html');
 
 if (fs.existsSync(frontendIndexPath)) {
-  app.use(express.static(frontendDistPath));
+  app.use(express.static(path.dirname(frontendIndexPath)));
 
   app.get('*', (req, res, next) => {
     if (req.path.startsWith('/api') || req.path === '/health') {
