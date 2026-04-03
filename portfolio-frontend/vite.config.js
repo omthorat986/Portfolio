@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => {
   return {
     base: mode === 'production' ? './' : '/',
     build: {
-      outDir: 'docs'
+      outDir: '../docs'
     },
     plugins: [react()],
     server: {

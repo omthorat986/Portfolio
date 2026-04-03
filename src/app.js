@@ -44,7 +44,7 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
-const frontendDocsPath = path.resolve(__dirname, '../portfolio-frontend/docs');
+const frontendDocsPath = path.resolve(__dirname, '../docs');
 const frontendDistPath = path.resolve(__dirname, '../portfolio-frontend/dist');
 const frontendIndexPath = fs.existsSync(path.join(frontendDocsPath, 'index.html'))
   ? path.join(frontendDocsPath, 'index.html')
