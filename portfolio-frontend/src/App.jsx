@@ -151,25 +151,6 @@ function App() {
             A tactile portfolio built around polished UI layers, game-inspired details, and live project data.
           </p>
         </div>
-
-        <div className="intro-metrics" aria-label="Portfolio summary">
-          <div className="metric-card">
-            <span className="metric-value">{projects.length}</span>
-            <span className="metric-label">featured projects</span>
-          </div>
-          <div className="metric-card">
-            <span className="metric-value">3</span>
-            <span className="metric-label">story sections</span>
-          </div>
-          <div className="metric-card">
-            {loadState === 'loading' ? (
-              <span className="metric-value skeleton-pulse">&nbsp;</span>
-            ) : (
-              <span className="metric-value">{dataLabel}</span>
-            )}
-            <span className="metric-label">project source</span>
-          </div>
-        </div>
       </header>
 
       <BackgroundRocket />
