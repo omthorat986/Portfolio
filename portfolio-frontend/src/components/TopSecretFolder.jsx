@@ -1,4 +1,5 @@
 import React from 'react';
+import { personal, contact } from '../siteConfig';
 import './TopSecretFolder.css';
 
 export default function TopSecretFolder() {
@@ -9,12 +10,12 @@ export default function TopSecretFolder() {
         <div className="confidential-stamp">CONFIDENTIAL</div>
         
         <div className="folder-label">
-          <h2>Subject: OM</h2>
+          <h2>Subject: {personal.name}</h2>
           <p>Clearance: Level 4</p>
           <p>Status: ACTIVE DEVELOPER</p>
         </div>
         
-        <a href="#" className="folder-link-btn" title="Open Dossier">
+        <a href={contact.resumeUrl} className="folder-link-btn" title="Open Dossier">
           ACCESS FILE
         </a>
       </div>

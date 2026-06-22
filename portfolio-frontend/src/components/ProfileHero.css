@@ -1,3 +1,7 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ProfileHero — Full-viewport hero with game decorations
+   ═══════════════════════════════════════════════════════════════════ */
+
 .profile-hero {
   min-height: 100svh;
   display: flex;
@@ -8,9 +12,9 @@
   padding: clamp(36px, 5vw, 64px) 0 84px;
   isolation: isolate;
   background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.5), transparent 30%),
-    radial-gradient(circle at 85% 20%, rgba(225, 103, 58, 0.14), transparent 26%),
-    radial-gradient(circle at 15% 80%, rgba(13, 111, 148, 0.12), transparent 28%);
+    radial-gradient(circle at top left, hsla(0, 0%, 100%, 0.5), transparent 30%),
+    radial-gradient(circle at 85% 20%, hsla(16, 75%, 55%, 0.10), transparent 26%),
+    radial-gradient(circle at 15% 80%, hsla(196, 82%, 32%, 0.08), transparent 28%);
 }
 
 .hero-content {
@@ -37,19 +41,21 @@
   align-items: center;
 }
 
+/* ── Game Sprite Decorations ──────────────────────────────────────── */
+
 .pixel-sprite {
   position: absolute;
   top: 18%;
   right: 8%;
   width: 58px;
   height: 58px;
-  border-radius: 8px;
-  background:
-    linear-gradient(180deg, #8ce4ff 0%, #4fb0d0 100%);
-  border: 3px solid #1f2430;
+  border-radius: var(--radius-md);
+  background: linear-gradient(180deg, hsl(195, 80%, 75%) 0%, hsl(195, 55%, 58%) 100%);
+  border: 3px solid var(--ink);
   box-shadow:
-    0 0 0 4px rgba(255, 255, 255, 0.25),
-    0 10px 18px rgba(0, 0, 0, 0.2);
+    0 0 0 4px hsla(0, 0%, 100%, 0.25),
+    0 10px 18px hsla(0, 0%, 0%, 0.2),
+    0 0 16px hsla(195, 80%, 65%, 0.3);
   image-rendering: pixelated;
   z-index: 9;
   animation: spriteFloat 3.4s ease-in-out infinite;
@@ -66,8 +72,8 @@
   right: -8px;
   bottom: -12px;
   height: 8px;
-  border-radius: 999px;
-  background: rgba(31, 36, 48, 0.25);
+  border-radius: var(--radius-full);
+  background: hsla(222, 28%, 17%, 0.2);
   filter: blur(2px);
 }
 
@@ -76,9 +82,9 @@
   left: 9px;
   width: 40px;
   height: 10px;
-  border-radius: 6px;
-  background: #ffe59d;
-  border: 2px solid #1f2430;
+  border-radius: var(--radius-sm);
+  background: hsl(45, 90%, 80%);
+  border: 2px solid var(--ink);
 }
 
 .sprite-eye {
@@ -86,12 +92,12 @@
   top: 23px;
   width: 8px;
   height: 8px;
-  background: #1f2430;
+  background: var(--ink);
   border-radius: 2px;
   animation: spriteBlink 4.5s infinite;
 }
 
-.eye-left { left: 15px; }
+.eye-left  { left: 15px; }
 .eye-right { right: 15px; }
 
 .pokeball-orb {
@@ -100,10 +106,11 @@
   top: 22%;
   width: 54px;
   height: 54px;
-  border-radius: 999px;
-  border: 3px solid #1f2430;
-  background: linear-gradient(180deg, #f35f5f 0 48%, #1f2430 48% 52%, #fff6f6 52% 100%);
-  box-shadow: 0 10px 18px rgba(31, 36, 48, 0.2);
+  border-radius: var(--radius-full);
+  border: 3px solid var(--ink);
+  background: linear-gradient(180deg, hsl(0, 72%, 62%) 0 48%, var(--ink) 48% 52%, hsl(0, 0%, 97%) 52% 100%);
+  box-shadow: 0 10px 18px hsla(222, 28%, 17%, 0.2),
+              0 0 12px hsla(0, 72%, 62%, 0.2);
   z-index: 8;
   animation: pokeballBob 4.2s ease-in-out infinite;
 }
@@ -115,9 +122,9 @@
   width: 16px;
   height: 16px;
   transform: translate(-50%, -50%);
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   background: #fff;
-  border: 3px solid #1f2430;
+  border: 3px solid var(--ink);
 }
 
 .minecraft-block {
@@ -126,11 +133,11 @@
   bottom: 18%;
   width: 62px;
   height: 62px;
-  border: 3px solid #2d3126;
+  border: 3px solid hsl(80, 16%, 18%);
   border-radius: 4px;
-  background:
-    linear-gradient(180deg, #66a04d 0 40%, #8a5b34 40% 100%);
-  box-shadow: 0 12px 18px rgba(45, 49, 38, 0.24);
+  background: linear-gradient(180deg, hsl(105, 42%, 44%) 0 40%, hsl(28, 45%, 35%) 40% 100%);
+  box-shadow: 0 12px 18px hsla(80, 16%, 18%, 0.24),
+              0 0 10px hsla(105, 42%, 44%, 0.15);
   z-index: 8;
   animation: blockPulse 3.6s ease-in-out infinite;
 }
@@ -139,13 +146,13 @@
   position: absolute;
   width: 9px;
   height: 9px;
-  background: rgba(0, 0, 0, 0.2);
+  background: hsla(0, 0%, 0%, 0.18);
 }
 
-.p1 { top: 8px; left: 10px; }
-.p2 { top: 16px; right: 12px; }
+.p1 { top: 8px;    left: 10px;  }
+.p2 { top: 16px;   right: 12px; }
 .p3 { bottom: 18px; left: 18px; }
-.p4 { bottom: 8px; right: 8px; }
+.p4 { bottom: 8px;  right: 8px; }
 
 .race-car {
   position: absolute;
@@ -154,9 +161,9 @@
   width: 86px;
   height: 22px;
   border-radius: 12px 16px 8px 10px;
-  border: 2px solid rgba(34, 39, 52, 0.9);
-  background: linear-gradient(90deg, #2c3242 0 55%, #4b556d 55% 100%);
-  box-shadow: 0 8px 14px rgba(27, 31, 42, 0.2);
+  border: 2px solid hsla(222, 22%, 17%, 0.9);
+  background: linear-gradient(90deg, hsl(222, 22%, 21%) 0 55%, hsl(222, 15%, 38%) 55% 100%);
+  box-shadow: 0 8px 14px hsla(222, 22%, 14%, 0.2);
   opacity: 0.88;
   z-index: 8;
   animation: carIdle 3.2s ease-in-out infinite;
@@ -166,8 +173,8 @@
 .race-car::after {
   content: "";
   position: absolute;
-  border: 2px solid rgba(34, 39, 52, 0.9);
-  background: #394157;
+  border: 2px solid hsla(222, 22%, 17%, 0.9);
+  background: hsl(222, 18%, 28%);
 }
 
 .race-car::before {
@@ -193,8 +200,8 @@
   width: 18px;
   height: 10px;
   border-radius: 8px 8px 0 0;
-  background: linear-gradient(180deg, #b8d7ee 0%, #7da2c0 100%);
-  border: 2px solid rgba(34, 39, 52, 0.9);
+  background: linear-gradient(180deg, hsl(205, 45%, 80%) 0%, hsl(205, 35%, 62%) 100%);
+  border: 2px solid hsla(222, 22%, 17%, 0.9);
   border-bottom: 0;
 }
 
@@ -203,13 +210,13 @@
   bottom: -8px;
   width: 14px;
   height: 14px;
-  border-radius: 999px;
-  background: #1d2230;
-  border: 2px solid #58627c;
+  border-radius: var(--radius-full);
+  background: hsl(222, 22%, 12%);
+  border: 2px solid hsl(222, 15%, 42%);
 }
 
 .wheel-front { right: 12px; }
-.wheel-back { left: 12px; }
+.wheel-back  { left: 12px; }
 
 .car-wheel::after {
   content: "";
@@ -218,46 +225,39 @@
   left: 2px;
   width: 4px;
   height: 4px;
-  border-radius: 999px;
-  background: #9ea8bf;
+  border-radius: var(--radius-full);
+  background: hsl(222, 10%, 65%);
 }
+
+/* ── Animations ───────────────────────────────────────────────────── */
 
 @keyframes spriteFloat {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  50%      { transform: translateY(-8px); }
 }
 
 @keyframes spriteBlink {
   0%, 44%, 48%, 100% { transform: scaleY(1); }
-  46% { transform: scaleY(0.2); }
+  46%                 { transform: scaleY(0.2); }
 }
 
 @keyframes pokeballBob {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  50%      { transform: translateY(-6px); }
 }
 
 @keyframes blockPulse {
   0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-4px) scale(1.03); }
+  50%      { transform: translateY(-4px) scale(1.03); }
 }
 
 @keyframes carIdle {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+  50%      { transform: translateY(-4px); }
 }
 
-.flair-dice {
-  bottom: 15%;
-  left: 10%;
-  width: 80px;
-  height: 80px;
-  /* Placeholder URL for polyhedral dice */
-  background-image: radial-gradient(circle, #e74c3c 0%, transparent 60%);
-  animation-delay: -2s;
-}
+/* ── Scroll Indicator ─────────────────────────────────────────────── */
 
-/* Scroll Indicator */
 .scroll-indicator {
   position: absolute;
   bottom: 40px;
@@ -266,30 +266,36 @@
   align-items: center;
   gap: 10px;
   opacity: 0.6;
+  animation: fadeInUp 1s var(--ease-out) 1.5s both;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 0.6; transform: translateY(0); }
 }
 
 .scroll-indicator p {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: var(--font-mono);
   margin: 0;
   color: var(--ink-muted);
   font-weight: bold;
   text-transform: uppercase;
-  font-size: 0.8rem;
+  font-size: var(--text-xs);
   letter-spacing: 1px;
 }
 
 .mouse {
   width: 24px;
   height: 36px;
-  border: 2px solid #555;
-  border-radius: 12px;
+  border: 2px solid var(--ink-muted);
+  border-radius: var(--radius-md);
   position: relative;
 }
 
 .wheel {
   width: 4px;
   height: 6px;
-  background-color: #555;
+  background-color: var(--ink-muted);
   border-radius: 2px;
   position: absolute;
   top: 6px;
@@ -299,9 +305,13 @@
 }
 
 @keyframes scrollWheel {
-  0% { transform: translate(-50%, 0); opacity: 1; }
+  0%   { transform: translate(-50%, 0); opacity: 1; }
   100% { transform: translate(-50%, 15px); opacity: 0; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════════ */
 
 @media (max-width: 900px) {
   .profile-hero {
@@ -356,12 +366,9 @@
     bottom: -7px;
   }
 
-  .sprite-eye {
-    top: 19px;
-  }
-
-  .eye-left { left: 12px; }
-  .eye-right { right: 12px; }
+  .sprite-eye { top: 19px; }
+  .eye-left   { left: 12px; }
+  .eye-right  { right: 12px; }
 
   .hero-left {
     height: 300px;
@@ -369,7 +376,7 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .hero-content {
     gap: 20px;
     padding: 0 12px;
@@ -383,7 +390,6 @@
   .pokeball-orb,
   .minecraft-block,
   .race-car,
-  .flair-dice,
   .scroll-indicator {
     display: none;
   }

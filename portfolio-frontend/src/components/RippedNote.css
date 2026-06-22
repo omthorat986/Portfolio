@@ -1,48 +1,65 @@
+/* ═══════════════════════════════════════════════════════════════════
+   RippedNote — Torn-paper project note
+   ═══════════════════════════════════════════════════════════════════ */
+
 .ripped-note {
-  background: linear-gradient(165deg, #fff8c8 0%, #f6e59a 100%);
-  padding: 20px;
+  background: linear-gradient(165deg, hsl(48, 85%, 87%) 0%, hsl(45, 72%, 75%) 100%);
+  padding: var(--space-5);
   position: relative;
   min-height: 220px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 14px 24px rgba(31, 36, 48, 0.14);
-  color: #1f2430;
-  border-radius: 12px;
-  border: 1px solid rgba(31, 36, 48, 0.08);
+  box-shadow: var(--shadow-lg);
+  color: var(--ink);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line-subtle);
+  transition: transform var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out);
 }
 
-/* The torn edge effect at the bottom */
+.ripped-note:hover {
+  box-shadow: var(--shadow-xl);
+}
+
+/* Torn edge effect at the bottom */
 .ripped-edge {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 15px;
-  background-image: radial-gradient(circle at 10px 15px, transparent 12px, #fff9c4 13px);
+  background-image: radial-gradient(circle at 10px 15px, transparent 12px, hsl(48, 85%, 85%) 13px);
   background-size: 20px 15px;
   background-repeat: repeat-x;
 }
 
 .note-content h3 {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: var(--font-heading);
   margin: 0 0 5px;
   font-size: 1.3rem;
-  border-bottom: 1px dashed rgba(31, 36, 48, 0.25);
+  border-bottom: 1px dashed hsla(222, 28%, 17%, 0.2);
   padding-bottom: 5px;
 }
 
 .role-tag {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
   font-weight: bold;
-  color: #a94519;
+  color: hsl(18, 65%, 36%);
   margin: 0;
 }
 
 .note-body {
-  margin-top: 15px;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1rem;
+  margin-top: var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
   line-height: 1.4;
-  color: #25345f;
+  color: hsl(222, 35%, 26%);
+}
+
+@media (max-width: 640px) {
+  .ripped-note {
+    padding: var(--space-4);
+    min-height: 180px;
+  }
 }

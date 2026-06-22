@@ -1,3 +1,7 @@
+/* ═══════════════════════════════════════════════════════════════════
+   BackgroundRocket — Animated rocket flying across the viewport
+   ═══════════════════════════════════════════════════════════════════ */
+
 .rocket-container {
   position: fixed;
   bottom: -100px;
@@ -11,17 +15,13 @@
 
 .rocket-sprite {
   position: absolute;
-  /* Start bottom left, animate to top right */
   animation: flyBy 30s linear infinite;
   opacity: 0.5;
-  filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+  filter: drop-shadow(0 0 10px hsla(0, 0%, 100%, 0.3));
+  will-change: transform;
 }
 
 @keyframes flyBy {
-  0% {
-    transform: translate(-50px, 120vh) rotate(45deg) scale(0.8);
-  }
-  100% {
-    transform: translate(120vw, -10px) rotate(45deg) scale(0.8);
-  }
+  0%   { transform: translate(-50px, 120vh) rotate(45deg) scale(0.8); }
+  100% { transform: translate(120vw, -10px) rotate(45deg) scale(0.8); }
 }

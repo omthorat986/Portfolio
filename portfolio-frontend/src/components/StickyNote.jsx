@@ -1,4 +1,5 @@
 import React from 'react';
+import { stickyNote } from '../siteConfig';
 import './StickyNote.css';
 
 export default function StickyNote() {
@@ -6,9 +7,9 @@ export default function StickyNote() {
     <article className="sticky-note shadow-md">
       <div className="sticky-pin"></div>
       <div className="sticky-content">
-        <h3>URGENT!</h3>
-        <p>Fix collision detection logic in physics engine before Friday demo!</p>
-        <p className="sticky-signature">- T.</p>
+        <h3>{stickyNote.heading}</h3>
+        <p>{stickyNote.body}</p>
+        <p className="sticky-signature">{stickyNote.signature}</p>
       </div>
     </article>
   );

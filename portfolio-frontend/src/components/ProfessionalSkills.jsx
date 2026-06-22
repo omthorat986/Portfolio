@@ -1,10 +1,8 @@
 import React from 'react';
+import { codeSkills, toolSkills } from '../siteConfig';
 import './ProfessionalSkills.css';
 
 export default function ProfessionalSkills() {
-  const codeSkills = ['C++', 'C#', 'Java', 'Python', 'SQL', 'JavaScript'];
-  const toolSkills = ['Unity', 'OpenGL', 'Git', 'Perforce'];
-
   return (
     <article className="skills-clipboard shadow-2xl">
       <div className="clipboard-clip"></div>
@@ -21,7 +19,7 @@ export default function ProfessionalSkills() {
         </div>
 
         <div className="skills-category">
-          <h3>[ Engines & Tools ]</h3>
+          <h3>[ Engines &amp; Tools ]</h3>
           <ul className="skills-list">
             {toolSkills.map((skill, idx) => (
               <li key={idx} className="skill-item">{skill}</li>

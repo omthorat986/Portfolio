@@ -1,4 +1,7 @@
-/* Gaming elements resting on the desk */
+/* ═══════════════════════════════════════════════════════════════════
+   DesktopGamingDecor — PS5 controller & pixel art decorations
+   ═══════════════════════════════════════════════════════════════════ */
+
 .ps5-controller-decor {
   position: absolute;
   top: 50%;
@@ -8,14 +11,14 @@
   min-width: 100px;
   transform: rotate(15deg) translateY(-50px);
   z-index: 5;
-  filter: drop-shadow(10px 15px 12px rgba(0,0,0,0.3));
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s;
-  will-change: transform, filter;
+  filter: drop-shadow(10px 15px 12px hsla(0, 0%, 0%, 0.3));
+  transition: transform var(--duration-slow) var(--ease-spring),
+              filter var(--duration-slow) var(--ease-out);
 }
 
 .ps5-controller-decor:hover {
-  transform: rotate(5deg) translateY(-60px) scale(1.05) translateZ(0);
-  filter: drop-shadow(15px 20px 20px rgba(0,0,0,0.4));
+  transform: rotate(5deg) translateY(-60px) scale(1.05);
+  filter: drop-shadow(15px 20px 20px hsla(0, 0%, 0%, 0.4));
 }
 
 .pokemon-sprite-decor {
@@ -24,26 +27,33 @@
   left: 3%;
   z-index: 10;
   transform: scale(1.5) rotate(-5deg);
-  image-rendering: pixelated; /* Ensures pixel art doesn't blur */
-  filter: drop-shadow(4px 4px 0px rgba(0,0,0,0.2));
+  image-rendering: pixelated;
+  filter: drop-shadow(4px 4px 0px hsla(0, 0%, 0%, 0.2));
   animation: hoverFloat 4s ease-in-out infinite alternate;
-  will-change: transform;
 }
 
 @keyframes hoverFloat {
-  0% { transform: scale(1.5) rotate(-5deg) translateY(0) translateZ(0); }
-  100% { transform: scale(1.5) rotate(-5deg) translateY(-8px) translateZ(0); }
+  0%   { transform: scale(1.5) rotate(-5deg) translateY(0); }
+  100% { transform: scale(1.5) rotate(-5deg) translateY(-8px); }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .ps5-controller-decor {
     top: 5%;
     right: 2%;
     transform: rotate(-10deg) scale(0.7);
   }
+
   .pokemon-sprite-decor {
     left: 80%;
     bottom: -5%;
     transform: scale(1) rotate(10deg);
+  }
+}
+
+@media (max-width: 640px) {
+  .ps5-controller-decor,
+  .pokemon-sprite-decor {
+    display: none;
   }
 }

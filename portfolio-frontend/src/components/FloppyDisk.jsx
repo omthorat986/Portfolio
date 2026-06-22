@@ -1,9 +1,16 @@
 import React from 'react';
+import { contact } from '../siteConfig';
 import './FloppyDisk.css';
 
 export default function FloppyDisk() {
   return (
-    <a href="https://github.com/omthorat986" target="_blank" rel="noreferrer" style={{ textDecoration: 'none', color: 'inherit', display: 'block', cursor: 'pointer' }} title="Visit GitHub Repository">
+    <a
+      href={contact.githubUrl}
+      target="_blank"
+      rel="noreferrer"
+      className="floppy-link"
+      title="Visit GitHub Repository"
+    >
       <article className="floppy-disk shadow-xl">
         <div className="floppy-shutter">
           <div className="shutter-slide"></div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { personal, contact } from '../siteConfig';
 import './BusinessCard.css';
 
 export default function BusinessCard() {
@@ -6,20 +7,20 @@ export default function BusinessCard() {
     <article className="business-card shadow-lg">
       <div className="card-top-accent"></div>
       <div className="card-body">
-        <h1 className="card-name">OM</h1>
+        <h1 className="card-name">{personal.name}</h1>
         <h2 className="card-title">Gameplay Programmer</h2>
 
         <div className="card-divider"></div>
 
         <div className="card-contact">
-          <a href="mailto:thoratom33@gmail.com" className="contact-link">
-            <span className="contact-icon">✉</span> thoratom33@gmail.com
+          <a href={`mailto:${contact.email}`} className="contact-link">
+            <span className="contact-icon">✉</span> {contact.email}
           </a>
-          <a href="https://www.linkedin.com/in/om-thorat-623630299" target="_blank" rel="noreferrer" className="contact-link">
-            <span className="contact-icon">in</span> linkedin.com/in/om-thorat-623630299
+          <a href={contact.linkedinUrl} target="_blank" rel="noreferrer" className="contact-link">
+            <span className="contact-icon">in</span> {contact.linkedinLabel}
           </a>
-          <a href="https://github.com/omthorat986" target="_blank" rel="noreferrer" className="contact-link">
-            <span className="contact-icon">&gt;_</span> github.com/omthorat986
+          <a href={contact.githubUrl} target="_blank" rel="noreferrer" className="contact-link">
+            <span className="contact-icon">&gt;_</span> {contact.githubLabel}
           </a>
           <p><span className="contact-icon">✦</span> available for hire</p>
         </div>

@@ -37,9 +37,6 @@ export default function ProfileHero() {
         <span className="car-wheel wheel-back"></span>
       </div>
 
-      <div className="flair flair-coffee" aria-hidden="true" />
-      <div className="flair flair-dice" aria-hidden="true" />
-
       <div className="scroll-indicator">
         <span className="mouse">
           <span className="wheel"></span>

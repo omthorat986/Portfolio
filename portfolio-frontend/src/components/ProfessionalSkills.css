@@ -1,43 +1,39 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ProfessionalSkills — Clipboard with skill tags
+   ═══════════════════════════════════════════════════════════════════ */
+
 .skills-clipboard {
   width: min(100%, 320px);
   min-height: 400px;
-  background-color: #8b5a2b; /* Brown wooden clipboard color */
-  border-radius: 8px;
+  background-color: hsl(25, 48%, 36%);
+  border-radius: var(--radius-md);
   position: relative;
-  padding: 25px 15px 15px 15px;
+  padding: var(--space-6) var(--space-4) var(--space-4);
   transform: rotate(-2deg);
-  transition: transform 0.3s;
-  box-shadow: 
-    4px 10px 15px rgba(0,0,0,0.3),
-    inset 0 0 10px rgba(0,0,0,0.4);
+  transition: transform var(--duration-normal) var(--ease-spring),
+              box-shadow var(--duration-normal) var(--ease-out);
+  box-shadow: var(--shadow-xl),
+              inset 0 0 10px hsla(0, 0%, 0%, 0.3);
   z-index: 5;
-}
-
-@media (max-width: 700px) {
-  .skills-clipboard {
-    transform: rotate(0deg);
-    margin: 0 auto;
-    padding: 22px 12px 14px;
-  }
 }
 
 .skills-clipboard:hover {
   transform: rotate(0deg) translateY(-5px);
+  box-shadow: var(--shadow-2xl);
   z-index: 15;
 }
 
 .clipboard-clip {
   width: 120px;
   height: 40px;
-  background-color: #bdc3c7; /* Silver metal clip */
-  border-radius: 5px;
+  background-color: hsl(210, 5%, 76%);
+  border-radius: var(--radius-sm);
   position: absolute;
   top: -10px;
   left: 50%;
   transform: translateX(-50%);
-  box-shadow: 
-    0 5px 10px rgba(0,0,0,0.4),
-    inset 0 2px 5px rgba(255,255,255,0.7);
+  box-shadow: var(--shadow-md),
+              inset 0 2px 5px hsla(0, 0%, 100%, 0.6);
   z-index: 10;
 }
 
@@ -45,7 +41,7 @@
   content: '';
   width: 80px;
   height: 10px;
-  background-color: #7f8c8d;
+  background-color: hsl(210, 5%, 50%);
   position: absolute;
   bottom: 5px;
   left: 20px;
@@ -53,36 +49,36 @@
 }
 
 .clipboard-paper {
-  background-color: #fdfbf7; /* Off-white printer paper */
+  background-color: var(--paper);
   width: 100%;
   height: 100%;
   border-radius: 2px;
-  padding: 30px 20px 20px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  font-family: 'Courier New', Courier, monospace;
+  padding: var(--space-8) var(--space-5) var(--space-5);
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font-mono);
 }
 
 .skills-title {
   text-align: center;
   font-size: 1.4rem;
   font-weight: bold;
-  color: #2c3e50;
-  border-bottom: 2px dashed #bdc3c7;
-  padding-bottom: 10px;
-  margin-top: 5px;
-  margin-bottom: 20px;
+  color: hsl(210, 29%, 24%);
+  border-bottom: 2px dashed hsl(210, 5%, 76%);
+  padding-bottom: var(--space-3);
+  margin-top: var(--space-1);
+  margin-bottom: var(--space-5);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .skills-category {
-  margin-bottom: 25px;
+  margin-bottom: var(--space-6);
 }
 
 .skills-category h3 {
-  font-size: 1rem;
-  color: #c0392b; /* Red marker accent */
-  margin: 0 0 10px;
+  font-size: var(--text-base);
+  color: var(--danger);
+  margin: 0 0 var(--space-3);
 }
 
 .skills-list {
@@ -91,16 +87,34 @@
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 .skill-item {
-  background-color: #ecf0f1;
-  color: #34495e;
-  padding: 4px 10px;
-  font-size: 0.85rem;
+  background-color: hsl(210, 20%, 94%);
+  color: hsl(210, 29%, 24%);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-sm);
   font-weight: bold;
-  border-radius: 4px;
-  border: 1px solid #bdc3c7;
+  border-radius: var(--radius-sm);
+  border: 1px solid hsl(210, 10%, 82%);
   display: inline-block;
+  transition: background-color var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.skill-item:hover {
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+  box-shadow: var(--shadow-glow-accent);
+}
+
+@media (max-width: 640px) {
+  .skills-clipboard {
+    transform: rotate(0deg);
+    margin: 0 auto;
+    padding: var(--space-5) var(--space-3) var(--space-4);
+  }
 }

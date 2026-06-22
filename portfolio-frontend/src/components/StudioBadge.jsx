@@ -1,4 +1,5 @@
 import React from 'react';
+import { personal } from '../siteConfig';
 import './StudioBadge.css';
 
 export default function StudioBadge() {
@@ -18,15 +19,15 @@ export default function StudioBadge() {
       </div>
 
       <div className="badge-info">
-        <h2 className="badge-name">OM</h2>
-        <h3 className="badge-title">Gameplay & Systems Programmer</h3>
-        <p className="badge-dept">Engineering Dept // Level 02</p>
+        <h2 className="badge-name">{personal.name}</h2>
+        <h3 className="badge-title">{personal.title}</h3>
+        <p className="badge-dept">{personal.department}</p>
       </div>
 
       <div className="badge-footer">
         {/* CSS simulated barcode */}
         <div className="barcode"></div>
-        <span className="badge-id">ID: 0x8F9B2C</span>
+        <span className="badge-id">{personal.badgeId}</span>
       </div>
     </article>
   );

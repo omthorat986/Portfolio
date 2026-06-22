@@ -1,45 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { terminalLines } from '../siteConfig';
 import './TerminalBio.css';
-
-const lines = [
-  '~ $ ./execute_profile.sh',
-  '> Loading Game Developer...',
-  '> 1+ years compiling code and drinking coffee.'
-];
 
 export default function TerminalBio() {
   const [text, setText] = useState('');
   const [phase, setPhase] = useState(0);
+  const timersRef = useRef([]);
 
   useEffect(() => {
     let currentLine = 0;
     let currentChar = 0;
-    let typingTimer;
+
+    const schedule = (fn, delay) => {
+      const id = setTimeout(fn, delay);
+      timersRef.current.push(id);
+      return id;
+    };
 
     const typeChar = () => {
-      if (currentLine >= lines.length) {
+      if (currentLine >= terminalLines.length) {
         setPhase(2); // Done
         return;
       }
 
-      const fullLine = lines[currentLine];
+      const fullLine = terminalLines[currentLine];
 
       if (currentChar < fullLine.length) {
         setText((prev) => prev + fullLine.charAt(currentChar));
         currentChar++;
-        typingTimer = setTimeout(typeChar, 40); // typing speed
+        schedule(typeChar, 40);
       } else {
         setText((prev) => prev + '\n');
         currentLine++;
         currentChar = 0;
-        typingTimer = setTimeout(typeChar, 300); // pause between lines
+        schedule(typeChar, 300);
       }
     };
 
-    setPhase(1); // Typing
-    typingTimer = setTimeout(typeChar, 500); // Initial delay
+    setPhase(1);
+    schedule(typeChar, 500);
 
-    return () => clearTimeout(typingTimer);
+    return () => {
+      timersRef.current.forEach(clearTimeout);
+      timersRef.current = [];
+    };
   }, []);
 
   return (
@@ -50,7 +54,7 @@ export default function TerminalBio() {
           <span className="control minimize"></span>
           <span className="control maximize"></span>
         </div>
-        <div className="window-title">bash - 80x24</div>
+        <div className="window-title">bash — 80×24</div>
       </header>
       <div className="terminal-body">
         <pre className="terminal-text">
