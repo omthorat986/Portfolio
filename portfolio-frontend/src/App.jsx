@@ -142,16 +142,7 @@ function App() {
         </div>
       </nav>
 
-      {/* ── Intro Header ─────────────────────────────────────── */}
-      <header className="portfolio-intro">
-        <div className="intro-copy">
-          <p className="intro-eyebrow">Interactive portfolio</p>
-          <h1>Game systems, presented like a curated desktop exhibit.</h1>
-          <p className="intro-summary">
-            A tactile portfolio built around polished UI layers, game-inspired details, and live project data.
-          </p>
-        </div>
-      </header>
+
 
       <BackgroundRocket />
 
