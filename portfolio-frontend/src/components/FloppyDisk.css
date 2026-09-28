@@ -1,123 +1,390 @@
 /* ═══════════════════════════════════════════════════════════════════
-   FloppyDisk — Retro 3.5" floppy disk GitHub link
+   FloppyDisk — Retro 3.5" floppy disk with interactive sticker
    ═══════════════════════════════════════════════════════════════════ */
 
-/* Link wrapper — replaces inline styles */
 .floppy-link {
   text-decoration: none;
   color: inherit;
-  display: block;
+  display: flex;
+  justify-content: center;
+  width: 100%;
   cursor: pointer;
+  outline: none;
 }
 
 .floppy-disk {
-  width: min(100%, 200px);
-  aspect-ratio: 1 / 1;
+  width: 100%;
+  max-width: 270px;
+  aspect-ratio: 1 / 1.08;
   height: auto;
-  background-color: hsl(210, 29%, 24%);
-  border-radius: 4px;
+  background-color: hsl(220, 28%, 16%);
+  border-radius: 8px;
   position: relative;
-  transform: rotate(-8deg);
+  transform: rotate(-1.5deg);
   transition: transform var(--duration-normal) var(--ease-spring),
               box-shadow var(--duration-normal) var(--ease-out);
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid hsl(210, 35%, 14%);
-  box-shadow: var(--shadow-lg),
-              inset 2px 2px 5px hsla(0, 0%, 100%, 0.08);
+  border: 1px solid hsl(220, 30%, 10%);
+  box-shadow: var(--shadow-xl),
+              inset 2px 2px 5px hsla(0, 0%, 100%, 0.1),
+              inset -2px -2px 5px hsla(0, 0%, 0%, 0.5);
+  padding-bottom: 12px;
 }
 
 .floppy-disk:hover {
-  transform: rotate(0deg) translateY(-5px);
-  box-shadow: var(--shadow-xl);
+  transform: rotate(0deg) translateY(-6px) scale(1.02);
+  box-shadow: var(--shadow-2xl), var(--shadow-glow-cyan);
   z-index: 25;
 }
 
+.floppy-link:focus-visible .floppy-disk {
+  outline: 2px solid var(--accent-alt);
+}
+
+/* Metal shutter */
 .floppy-shutter {
-  width: 60%;
-  height: 30%;
-  background-color: hsl(210, 5%, 76%);
+  width: 58%;
+  height: 32%;
+  background: linear-gradient(180deg, #d8dcde 0%, #8e959e 100%);
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  border-radius: 0 0 2px 2px;
-  box-shadow: inset 1px -2px 5px hsla(0, 0%, 0%, 0.2);
+  border-radius: 0 0 3px 3px;
+  box-shadow: inset 1px -2px 5px hsla(0, 0%, 0%, 0.35), 0 3px 6px rgba(0, 0, 0, 0.25);
   display: flex;
   justify-content: flex-end;
-  align-items: flex-end;
-  padding: 5px;
+  align-items: center;
+  padding: 6px;
+  transition: transform 300ms var(--ease-spring);
+}
+
+.floppy-shutter.shutter-open {
+  transform: translateX(-35%);
 }
 
 .shutter-slide {
-  width: 25px;
-  height: 40px;
-  background-color: hsl(210, 20%, 30%);
-}
-
-.floppy-label-area {
-  margin-top: 35%;
-  width: 75%;
-  height: 55%;
-  background-color: hsl(210, 35%, 14%);
+  width: 22px;
+  height: 36px;
+  background-color: hsl(220, 30%, 18%);
   border-radius: 2px;
   position: relative;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.shutter-window {
+  position: absolute;
+  top: 6px;
+  left: 4px;
+  right: 4px;
+  bottom: 6px;
+  background: #000;
+  border-radius: 1px;
+}
+
+/* Label Well */
+.floppy-label-area {
+  margin-top: 36%;
+  width: 82%;
+  height: 54%;
+  background-color: hsl(220, 35%, 11%);
+  border-radius: 4px;
+  position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  border: 1px solid hsla(0, 0%, 0%, 0.4);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
+  padding: 6px;
 }
 
 .floppy-top-arrows {
   position: absolute;
-  top: 5px;
-  left: 10px;
-  color: var(--ink-faint);
-  font-weight: bold;
+  top: 3px;
+  left: 8px;
+  color: var(--accent-alt);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   PREMIUM RETRO ADHESIVE STICKER
+   ═══════════════════════════════════════════════════════════════════ */
 
 .floppy-sticker {
-  width: 86%;
-  height: 72%;
+  width: 100%;
+  height: 100%;
   background-color: var(--paper);
-  border-radius: 2px;
-  border-top: 20px solid var(--accent-color);
-  box-shadow: inset 0 0 5px hsla(0, 0%, 0%, 0.1);
-  padding: 5px;
+  background-image:
+    linear-gradient(hsla(210, 20%, 50%, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, hsla(210, 20%, 50%, 0.06) 1px, transparent 1px);
+  background-size: 100% 18px, 18px 100%;
+  border-radius: 3px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25), inset 0 0 8px rgba(0, 0, 0, 0.05);
+  padding: 0 8px 8px;
   font-family: var(--font-mono);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid hsla(0, 0%, 0%, 0.1);
+  transition: transform var(--duration-normal) var(--ease-spring),
+              box-shadow var(--duration-normal) var(--ease-out);
 }
 
-.floppy-sticker h3 {
-  margin: 0;
-  font-size: var(--text-sm);
-  color: hsl(210, 29%, 24%);
+.floppy-sticker:hover {
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+}
+
+/* Retro Rainbow Stripes Header */
+.sticker-stripes {
+  display: flex;
+  height: 8px;
+  width: calc(100% + 16px);
+  margin-left: -8px;
+  margin-bottom: 6px;
+}
+
+.stripe {
+  flex: 1;
+  height: 100%;
+}
+
+.stripe-red    { background-color: #f44336; }
+.stripe-orange { background-color: #ff9800; }
+.stripe-yellow { background-color: #ffeb3b; }
+.stripe-cyan   { background-color: #00bcd4; }
+.stripe-purple { background-color: #9c27b0; }
+
+/* Brand line */
+.sticker-brand-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid hsla(220, 20%, 40%, 0.2);
+  padding-bottom: 2px;
+  margin-bottom: 4px;
+}
+
+.sticker-brand-name {
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: hsl(220, 25%, 35%);
+}
+
+.sticker-hd-badge {
+  font-size: 0.58rem;
   font-weight: 900;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0 4px;
+  border-radius: 2px;
+  letter-spacing: 0.5px;
 }
 
-.floppy-sticker p {
-  margin: 2px 0 0;
-  font-size: 0.7rem;
+/* Form fields with faint lines */
+.sticker-field {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  border-bottom: 1px dashed hsla(220, 20%, 50%, 0.25);
+  padding: 2px 0;
+  margin-bottom: 2px;
+}
+
+.sticker-field-tag {
+  font-size: 0.55rem;
+  font-weight: 800;
+  color: var(--accent-color);
+  letter-spacing: 0.5px;
+}
+
+.sticker-title {
+  margin: 0;
+  font-size: 0.76rem;
+  font-weight: 900;
+  color: var(--ink);
+  letter-spacing: -0.2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sticker-content-text {
+  margin: 0;
+  font-size: 0.65rem;
+  color: var(--ink-muted);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Bottom row: Hologram + Meta */
+.sticker-bottom-row {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 4px;
+}
+
+/* Circular Hologram Stamp */
+.sticker-holo-seal {
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  background: linear-gradient(
+    135deg,
+    #ffe259 0%,
+    #ffa751 25%,
+    #00c6ff 50%,
+    #0072ff 75%,
+    #f857a6 100%
+  );
+  background-size: 200% 200%;
+  animation: holoShine 4s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), inset 0 0 2px rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: transform var(--duration-fast);
+}
+
+.sticker-holo-seal:hover {
+  transform: scale(1.08) rotate(-2deg);
+}
+
+@keyframes holoShine {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+.holo-icon {
+  font-size: 0.55rem;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.holo-text {
+  font-size: 0.48rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.sticker-meta-data {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.sticker-capacity {
+  font-size: 0.65rem;
+  font-weight: 900;
+  color: var(--ink);
+}
+
+.sticker-sectors {
+  font-size: 0.5rem;
   color: var(--ink-faint);
 }
 
-.capacity {
+/* 3D Peeling Dog-Ear Corner */
+.sticker-peel-corner {
   position: absolute;
-  bottom: 20px;
-  right: 15px;
-  font-size: 0.65rem;
-  font-weight: bold;
+  bottom: 0;
+  right: 0;
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+  transition: width 250ms var(--ease-spring), height 250ms var(--ease-spring);
+}
+
+.peel-triangle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, transparent 50%, var(--desk-bg-deep) 50%);
+  border-top-left-radius: 4px;
+  box-shadow: -2px -2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.peel-shadow {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, transparent 40%, rgba(0, 0, 0, 0.25) 50%, transparent 60%);
+}
+
+.floppy-sticker.sticker-peeling .sticker-peel-corner {
+  width: 38px;
+  height: 38px;
+}
+
+/* Git clone pill */
+.floppy-clone-chip {
+  margin-top: 8px;
+  background: hsla(192, 92%, 52%, 0.15);
+  color: var(--accent-alt);
+  border: 1px solid hsla(192, 92%, 52%, 0.3);
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: all var(--duration-fast);
+}
+
+.floppy-clone-chip span {
+  color: var(--accent-color);
+}
+
+.floppy-clone-chip:hover {
+  background: var(--accent-alt);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px hsla(192, 92%, 52%, 0.35);
 }
 
 .floppy-bottom-notch {
-  width: 15px;
-  height: 15px;
-  background-color: transparent;
-  border-right: 1px solid hsl(210, 35%, 14%);
-  border-bottom: 1px solid hsl(210, 35%, 14%);
+  width: 14px;
+  height: 14px;
+  border-right: 1px solid hsl(220, 35%, 10%);
+  border-bottom: 1px solid hsl(220, 35%, 10%);
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  bottom: 8px;
+  right: 8px;
+}
+
+.floppy-write-protect {
+  width: 10px;
+  height: 10px;
+  background: #111;
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  border-radius: 1px;
 }
 
 @media (max-width: 640px) {

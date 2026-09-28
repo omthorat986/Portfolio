@@ -1,0 +1,217 @@
+/* ═══════════════════════════════════════════════════════════════════
+   CarSticker — Die-Cut Cyber Supercar Vinyl Sticker
+   ═══════════════════════════════════════════════════════════════════ */
+
+.car-sticker-wrapper {
+  position: absolute;
+  left: 7%;
+  bottom: 10%;
+  z-index: 15;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+  animation: carAmbientFloat 4s ease-in-out infinite;
+  transition: transform 220ms var(--ease-spring);
+}
+
+.car-sticker-wrapper:hover {
+  animation-play-state: paused;
+  transform: translateY(-8px) scale(1.12);
+}
+
+.car-sticker-wrapper:focus-visible {
+  outline: 2px solid var(--accent-alt);
+  border-radius: var(--radius-md);
+}
+
+/* Ambient idle float */
+@keyframes carAmbientFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(-1.5deg);
+  }
+}
+
+/* ── Die-Cut Vinyl Sticker Base Plate ─────────────────────────────── */
+.car-diecut-plate {
+  width: 154px;
+  height: 68px;
+  position: relative;
+  background: #ffffff;
+  border-radius: 14px 20px 10px 12px;
+  padding: 4px;
+  box-shadow:
+    0 10px 24px hsla(0, 0%, 0%, 0.4),
+    0 2px 6px hsla(0, 0%, 0%, 0.25),
+    0 0 0 2px hsla(0, 0%, 100%, 0.8),
+    0 0 20px hsla(192, 92%, 52%, 0.2);
+  transition: box-shadow 250ms var(--ease-out),
+              transform 250ms var(--ease-spring);
+}
+
+.car-sticker-wrapper:hover .car-diecut-plate {
+  box-shadow:
+    0 16px 36px hsla(0, 0%, 0%, 0.55),
+    0 0 30px hsla(192, 92%, 52%, 0.45),
+    0 0 0 3px #ffffff;
+}
+
+.car-sticker-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+}
+
+/* Glowing LED Headlights */
+.headlight-led {
+  filter: drop-shadow(0 0 6px #00ffff);
+  animation: headlightPulse 2s infinite ease-in-out;
+}
+
+@keyframes headlightPulse {
+  0%, 100% { opacity: 0.9; }
+  50%      { opacity: 1; filter: drop-shadow(0 0 10px #00ffff); }
+}
+
+.taillight-led {
+  filter: drop-shadow(0 0 4px #ff1744);
+}
+
+/* Underglow ground reflection */
+.car-underglow {
+  filter: blur(2px);
+  transition: fill 300ms ease;
+}
+
+/* Exhaust flames */
+.exhaust-flames {
+  opacity: 0;
+  transform-origin: right center;
+  transition: opacity 150ms ease;
+}
+
+.exhaust-flames.flames-active {
+  opacity: 1;
+  animation: flameFlicker 100ms infinite alternate;
+}
+
+@keyframes flameFlicker {
+  0%   { transform: scaleX(0.8) scaleY(0.9); }
+  100% { transform: scaleX(1.3) scaleY(1.1); filter: drop-shadow(-4px 0 8px #ff4500); }
+}
+
+/* 3D Peel corner on vinyl sticker */
+.car-peel-corner {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, transparent 50%, rgba(200, 200, 200, 0.45) 50%);
+  border-top-left-radius: 3px;
+  pointer-events: none;
+}
+
+/* ── Throttle Boost Animation on Click ────────────────────────────── */
+.car-sticker-wrapper.car-boosting .car-diecut-plate {
+  animation: carLurchBoost 650ms var(--ease-spring);
+}
+
+@keyframes carLurchBoost {
+  0%   { transform: translateX(0) scale(1); }
+  20%  { transform: translateX(-8px) scale(0.96) rotate(-3deg); }
+  45%  { transform: translateX(18px) scale(1.14) rotate(2deg); }
+  75%  { transform: translateX(4px) scale(1.05) rotate(0deg); }
+  100% { transform: translateX(0) scale(1); }
+}
+
+/* ── Hover Telemetry Pill ─────────────────────────────────────────── */
+.car-tooltip {
+  margin-top: 8px;
+  background: var(--paper);
+  border: 1px solid var(--line-soft);
+  box-shadow: var(--shadow-md);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  opacity: 0;
+  transform: translateY(4px);
+  pointer-events: none;
+  transition: opacity 200ms ease, transform 200ms var(--ease-spring);
+  white-space: nowrap;
+}
+
+.car-sticker-wrapper:hover .car-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.car-tag-badge {
+  font-weight: 800;
+  font-size: 0.58rem;
+  background: hsla(192, 92%, 52%, 0.15);
+  color: var(--accent-alt);
+  padding: 1px 5px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.car-name-text {
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.car-speed-badge {
+  font-weight: 700;
+  color: var(--accent-color);
+  background: hsla(24, 95%, 58%, 0.12);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1100px) {
+  .car-sticker-wrapper {
+    left: 4%;
+    bottom: 8%;
+  }
+  .car-diecut-plate {
+    width: 130px;
+    height: 58px;
+  }
+}
+
+@media (max-width: 768px) {
+  .car-sticker-wrapper {
+    left: 4%;
+    bottom: 6%;
+  }
+  .car-diecut-plate {
+    width: 110px;
+    height: 50px;
+    padding: 3px;
+  }
+  .car-tooltip {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .car-sticker-wrapper {
+    display: none;
+  }
+}

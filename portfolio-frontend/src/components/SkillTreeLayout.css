@@ -5,46 +5,76 @@
 .skill-tree-section {
   width: 100%;
   max-width: 100%;
-  min-height: 920px;
-  background-color: hsl(220, 16%, 97%);
+  min-height: 900px;
+  background-color: hsla(224, 30%, 6%, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   background-image:
-    radial-gradient(circle, hsla(210, 30%, 70%, 0.12) 1px, transparent 1px),
-    linear-gradient(hsla(210, 30%, 70%, 0.14) 1px, transparent 1px),
-    linear-gradient(90deg, hsla(210, 30%, 70%, 0.14) 1px, transparent 1px);
-  background-size: 40px 40px, 40px 40px, 40px 40px;
+    radial-gradient(circle, hsla(192, 92%, 52%, 0.15) 1px, transparent 1px),
+    linear-gradient(hsla(192, 92%, 52%, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, hsla(192, 92%, 52%, 0.08) 1px, transparent 1px);
+  background-size: 36px 36px, 36px 36px, 36px 36px;
   position: relative;
-  padding: clamp(52px, 7vw, 80px) 20px;
-  overflow: visible;
-  box-shadow: inset 0 20px 40px hsla(0, 0%, 0%, 0.04);
+  padding: clamp(60px, 8vw, 90px) clamp(16px, 4vw, 40px);
+  overflow: hidden;
+  box-shadow: inset 0 20px 40px hsla(0, 0%, 0%, 0.2);
+  transition: background-color var(--duration-normal);
+}
+
+.skill-tree-header-wrapper {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 50px auto;
+  position: relative;
+  z-index: 5;
+}
+
+.skill-tree-badge {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--accent-alt);
+  background: hsla(192, 92%, 52%, 0.12);
+  border: 1px solid hsla(192, 92%, 52%, 0.3);
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  display: inline-block;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
 }
 
 .graph-title {
-  text-align: center;
-  font-family: var(--font-mono);
-  color: hsl(210, 35%, 22%);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 60px;
-  background: hsla(0, 0%, 100%, 0.92);
-  display: inline-block;
-  padding: var(--space-3) var(--space-5);
-  border: 1px solid hsla(210, 29%, 24%, 0.15);
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  font-family: var(--font-heading);
+  color: var(--ink);
+  margin: 0 0 12px 0;
+  letter-spacing: -0.5px;
+}
+
+.graph-subtitle {
+  font-size: var(--text-sm);
+  color: var(--ink-muted);
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.skill-tree-layout-wrapper {
+  display: flex;
+  max-width: 1280px;
+  margin: 0 auto;
+  gap: var(--space-8);
+  align-items: flex-start;
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  box-shadow: var(--shadow-md);
-  border-radius: var(--radius-sm);
+  z-index: 2;
 }
 
 .skill-tree-container {
-  max-width: 760px;
-  height: 760px;
-  margin: 0 auto;
+  flex: 1.2;
+  height: 720px;
   position: relative;
 }
 
-/* ── SVG Connections ──────────────────────────────────────────────── */
-
+/* SVG Circuit */
 .skill-connections {
   position: absolute;
   top: 0;
@@ -56,7 +86,7 @@
 
 .connection-line {
   fill: none;
-  stroke: hsl(210, 10%, 75%);
+  stroke: var(--line-soft);
   stroke-width: 4px;
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
@@ -65,179 +95,285 @@
 .connection-line.draw-line {
   animation: drawPath 3s ease-in-out forwards;
   stroke: var(--accent-color);
-  filter: drop-shadow(0 0 4px hsla(16, 75%, 55%, 0.3));
+  filter: drop-shadow(0 0 8px hsla(24, 95%, 58%, 0.5));
 }
 
 @keyframes drawPath {
   to { stroke-dashoffset: 0; }
 }
 
-/* ── Skill Nodes ──────────────────────────────────────────────────── */
-
+/* Nodes */
 .skill-node {
   position: absolute;
   display: flex;
   align-items: center;
   gap: var(--space-4);
-  background: hsla(0, 0%, 100%, 0.95);
+  background: var(--paper);
   padding: var(--space-4);
-  border: 1px solid hsla(210, 29%, 24%, 0.18);
+  border: 1px solid var(--line-subtle);
   border-radius: var(--radius-lg);
-  width: 340px;
+  width: 360px;
   box-shadow: var(--shadow-lg);
   z-index: 2;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity var(--duration-slow) var(--ease-out),
-              transform var(--duration-slow) var(--ease-out),
-              box-shadow var(--duration-normal) var(--ease-out);
+  cursor: pointer;
+  outline: none;
+  transition: all var(--duration-normal) var(--ease-spring);
 }
 
 .skill-node:hover {
-  box-shadow: var(--shadow-xl),
-              0 0 0 1px hsla(16, 75%, 55%, 0.15);
+  box-shadow: var(--shadow-2xl), var(--shadow-glow-cyan);
+  border-color: var(--accent-alt);
+  transform: translateY(-4px);
+}
+
+.skill-node.node-selected {
+  border-color: var(--accent-color);
+  box-shadow: var(--shadow-2xl), var(--shadow-glow-accent);
+  background: var(--surface-glass);
 }
 
 .node-active        { opacity: 1; transform: translateY(0); }
-.node-active-delay-1 { opacity: 1; transform: translateY(0); transition-delay: 1.2s; }
-.node-active-delay-2 { opacity: 1; transform: translateY(0); transition-delay: 2.2s; }
+.node-active-delay-1 { opacity: 1; transform: translateY(0); transition-delay: 0.8s; }
+.node-active-delay-2 { opacity: 1; transform: translateY(0); transition-delay: 1.6s; }
 
 .level-1 {
-  top: 50px;
+  top: 30px;
   left: 50%;
   transform: translateX(-50%) translateY(20px);
 }
 .level-1.node-active { transform: translateX(-50%) translateY(0); }
 
-.level-2 { top: 330px; left: calc(50% - 300px); }
-.level-3 { top: 590px; left: calc(50% - 40px); }
+.level-2 { top: 290px; left: calc(50% - 280px); }
+.level-3 { top: 530px; left: calc(50% - 40px); }
 
 .node-icon {
-  width: 42px;
-  height: 42px;
-  background: linear-gradient(180deg, hsl(210, 29%, 24%), hsl(210, 35%, 18%));
-  color: white;
+  width: 48px;
+  height: 48px;
+  background: var(--surface-dark);
+  color: var(--ink);
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: serif;
+  font-family: var(--font-heading);
   font-size: var(--text-lg);
   font-weight: bold;
   flex-shrink: 0;
-  transition: background var(--duration-slow) var(--ease-out),
-              box-shadow var(--duration-slow) var(--ease-out);
+  border: 2px solid var(--line-soft);
+  transition: all var(--duration-slow);
 }
 
 .node-active .node-icon,
-.node-active-delay-1 .node-icon,
-.node-active-delay-2 .node-icon {
+.skill-node.node-selected .node-icon {
   background: linear-gradient(180deg, var(--accent-warm), var(--accent-color));
-  box-shadow: 0 0 18px hsla(16, 75%, 55%, 0.5);
-  transition-delay: inherit;
+  color: #fff;
+  border-color: transparent;
+  box-shadow: var(--shadow-glow-accent);
+}
+
+.node-content {
+  flex: 1;
+}
+
+.node-top-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.node-level-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--accent-alt);
+}
+
+.node-mastery-tag {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--success);
+  font-weight: 700;
 }
 
 .node-content h3 {
-  margin: 0 0 5px;
+  margin: 0 0 3px;
   font-size: var(--text-md);
   font-family: var(--font-body);
-  color: hsl(210, 29%, 24%);
+  color: var(--ink);
+  font-weight: 700;
 }
 
 .node-content p {
   margin: 0;
-  font-size: var(--text-xs);
+  font-size: 0.76rem;
   font-family: var(--font-mono);
   color: var(--ink-faint);
 }
 
-/* ── Decorative Blueprint Elements ────────────────────────────────── */
+/* Inspector Sidebar */
+.skill-inspector-card {
+  flex: 0.8;
+  background: var(--paper);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  position: sticky;
+  top: 100px;
+  box-shadow: var(--shadow-xl);
+  animation: inspectorSlide 300ms var(--ease-spring);
+}
 
+@keyframes inspectorSlide {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.inspector-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed var(--line-soft);
+  padding-bottom: 8px;
+}
+
+.inspector-badge {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+.inspector-mastery {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--success);
+  font-weight: 700;
+}
+
+.inspector-title {
+  margin: 0;
+  font-size: var(--text-xl);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 800;
+}
+
+.inspector-desc {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--ink-muted);
+  line-height: 1.6;
+}
+
+.inspector-tags-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inspector-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--ink-faint);
+  letter-spacing: 1px;
+}
+
+.inspector-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.inspector-tag {
+  background: var(--surface-dark);
+  color: var(--ink);
+  border: 1px solid var(--line-subtle);
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.inspector-milestones {
+  margin-top: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--surface-glass);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line-subtle);
+}
+
+.milestone-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+}
+
+.milestone-check {
+  color: var(--success);
+  font-weight: bold;
+}
+
+/* Decorative SVGs */
 .blueprint-decor {
   position: absolute;
-  color: hsl(210, 29%, 24%);
-  width: 12vw;
-  max-width: 140px;
-  min-width: 80px;
+  color: var(--line-soft);
+  width: 10vw;
+  max-width: 120px;
+  min-width: 70px;
   opacity: 0;
   z-index: 0;
   pointer-events: none;
 }
 
-.decor-pacman   { top: 15%;  left: 5%;   transform: scale(0.8) rotate(-15deg); }
-.decor-triforce { top: 45%;  right: 8%;  transform: scale(0.9) rotate(10deg); }
-.decor-tetris   { bottom: 10%; left: 10%; transform: scale(0.85) rotate(-5deg); }
-.decor-invader  { top: 70%;  right: 12%; transform: scale(0.7) rotate(5deg); }
-.decor-dpad     { top: 10%;  right: 15%; transform: scale(0.75) rotate(-10deg); }
+.decor-pacman   { top: 18%;  left: 3%;   transform: scale(0.8) rotate(-15deg); }
+.decor-triforce { top: 48%;  left: 2%;   transform: scale(0.9) rotate(10deg); }
+.decor-tetris   { bottom: 8%; right: 4%; transform: scale(0.85) rotate(-5deg); }
+.decor-invader  { top: 12%;  right: 5%;  transform: scale(0.7) rotate(5deg); }
 
 .decor-fade-in         { animation: blueprintFade 2s ease forwards; }
 .decor-fade-in-delay-1 { animation: blueprintFade 2s ease forwards 0.5s; }
 .decor-fade-in-delay-2 { animation: blueprintFade 2s ease forwards 1s; }
 
 @keyframes blueprintFade {
-  to { opacity: 0.2; }
+  to { opacity: 0.25; }
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   RESPONSIVE
-   ═══════════════════════════════════════════════════════════════════ */
-
-@media (max-width: 900px) {
-  .skill-tree-section {
-    min-height: auto;
-    padding: 70px 16px 90px;
+@media (max-width: 1000px) {
+  .skill-tree-layout-wrapper {
+    flex-direction: column;
   }
-
   .skill-tree-container {
-    max-width: 680px;
+    width: 100%;
     height: auto;
-    display: grid;
-    gap: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
   }
-
-  .skill-connections { display: none; }
-
+  .skill-connections {
+    display: none;
+  }
   .skill-node {
     position: relative;
-    width: min(100%, 560px);
-    left: auto;
-    top: auto;
-    margin: 0 auto;
-    transform: translateY(20px);
-  }
-
-  .level-1, .level-2, .level-3,
-  .level-1.node-active,
-  .level-2.node-active-delay-1,
-  .level-3.node-active-delay-2 {
-    left: auto;
-    top: auto;
-    transform: translateY(0);
-  }
-
-  .node-active,
-  .node-active-delay-1,
-  .node-active-delay-2 {
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: 100%;
     opacity: 1;
   }
-}
-
-@media (max-width: 640px) {
-  .graph-title {
-    font-size: 0.95rem;
-    letter-spacing: 1px;
-    margin-bottom: 28px;
-    padding: var(--space-2) var(--space-3);
+  .skill-inspector-card {
+    position: static;
+    width: 100%;
   }
-
-  .skill-node {
-    width: min(100%, 340px);
-    padding: var(--space-3);
-    gap: var(--space-3);
-  }
-
-  .node-content h3 { font-size: var(--text-base); }
-  .node-content p   { font-size: 0.78rem; }
-
-  .blueprint-decor { display: none; }
 }

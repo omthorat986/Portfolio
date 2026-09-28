@@ -1,0 +1,568 @@
+/* ═══════════════════════════════════════════════════════════════════
+   MOUSE SCROLL INDICATOR COMPONENT STYLES
+   Realistic Hardware Mouse with Scroll-Driven Animation & Dynamics
+   ═══════════════════════════════════════════════════════════════════ */
+
+.mouse-scroll-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  outline: none;
+  transition: transform var(--duration-normal) var(--ease-out),
+              opacity var(--duration-normal) var(--ease-out);
+}
+
+.mouse-scroll-container:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 6px;
+  border-radius: var(--radius-md);
+}
+
+/* ── Hero Variant Placement ───────────────────────────────────────── */
+.mouse-hero-variant {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 25;
+  animation: mouseHeroFadeIn 1s var(--ease-out) 1.2s both;
+}
+
+@keyframes mouseHeroFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(16px);
+  }
+  100% {
+    opacity: 0.9;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.mouse-hero-variant:hover {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-3px) scale(1.03);
+}
+
+/* Dynamic tilt when scrolling */
+.mouse-hero-variant.is-scrolling.direction-down {
+  transform: translateX(-50%) translateY(2px) scale(1.02);
+}
+
+.mouse-hero-variant.is-scrolling.direction-up {
+  transform: translateX(-50%) translateY(-4px) scale(1.02);
+}
+
+.mouse-hero-variant.is-pressed {
+  transform: translateX(-50%) translateY(4px) scale(0.97);
+}
+
+/* ── Floating Variant Placement ──────────────────────────────────── */
+.mouse-floating-variant {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 990;
+  width: 58px;
+  height: 58px;
+  border-radius: var(--radius-full);
+  background: var(--surface-glass);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border: 1px solid var(--line-subtle);
+  box-shadow: var(--shadow-xl), var(--shadow-glow-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  animation: mouseFloatIn 0.4s var(--ease-spring) both;
+}
+
+@keyframes mouseFloatIn {
+  from {
+    opacity: 0;
+    transform: scale(0.6) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.mouse-floating-variant:hover {
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: var(--shadow-2xl), 0 0 25px var(--accent-alt);
+  border-color: var(--accent-alt);
+}
+
+.mouse-floating-variant.is-pressed {
+  transform: scale(0.92);
+}
+
+.mouse-floating-variant .mouse-device {
+  transform: scale(0.62);
+}
+
+.mouse-floating-variant .mouse-scroll-chevrons,
+.mouse-floating-variant .mouse-scroll-caption {
+  display: none;
+}
+
+/* Circular SVG Progress Ring for Floating Variant */
+.floating-progress-ring {
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: 64px;
+  height: 64px;
+  pointer-events: none;
+  transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+  fill: none;
+  stroke: var(--line-subtle);
+  stroke-width: 3;
+}
+
+.progress-ring-fill {
+  fill: none;
+  stroke: var(--accent-color);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.15s ease-out;
+  filter: drop-shadow(0 0 4px var(--accent-color));
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   HARDWARE MOUSE CHASSIS & DETAILS
+   ═══════════════════════════════════════════════════════════════════ */
+
+.mouse-device {
+  position: relative;
+  width: 30px;
+  height: 48px;
+  perspective: 500px;
+}
+
+/* Optical Sensor Underglow */
+.mouse-optical-flare {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 38px;
+  height: 20px;
+  background: radial-gradient(
+    ellipse at center,
+    var(--accent-color) 0%,
+    var(--accent-alt) 45%,
+    transparent 75%
+  );
+  filter: blur(5px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 1;
+}
+
+.is-scrolling .mouse-optical-flare {
+  background: radial-gradient(
+    ellipse at center,
+    var(--accent-alt) 0%,
+    var(--accent-color) 50%,
+    transparent 80%
+  );
+  filter: blur(6px);
+}
+
+/* Mouse Chassis */
+.mouse-chassis {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(175deg, var(--paper-warm) 0%, var(--desk-bg) 100%);
+  border: 2px solid var(--line-soft);
+  border-radius: 15px 15px 14px 14px;
+  box-shadow: 0 4px 12px hsla(0, 0%, 0%, 0.35),
+              inset 0 1px 2px hsla(255, 100%, 100%, 0.15);
+  overflow: hidden;
+  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+  z-index: 2;
+}
+
+.mouse-hero-variant:hover .mouse-chassis,
+.is-scrolling .mouse-chassis {
+  border-color: var(--accent-color);
+  box-shadow: 0 6px 18px hsla(0, 0%, 0%, 0.45),
+              0 0 14px hsla(24, 95%, 58%, 0.35);
+}
+
+/* Left & Right Button Shells */
+.mouse-buttons-row {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 24px;
+  display: flex;
+}
+
+.mouse-btn {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  transition: background var(--duration-fast);
+}
+
+.mouse-btn.btn-left {
+  border-right: 1px solid var(--line-subtle);
+}
+
+.mouse-btn.btn-active-pressed,
+.mouse-btn:active {
+  background: hsla(24, 95%, 58%, 0.2);
+}
+
+.btn-notch {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 2px;
+  height: 4px;
+  background: var(--ink-faint);
+  border-radius: 1px;
+  opacity: 0.6;
+}
+
+/* Mechanical Scroll Wheel Chamber */
+.mouse-wheel-well {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 16px;
+  background: var(--terminal-bg);
+  border: 1px solid var(--line-soft);
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px hsla(0, 0%, 0%, 0.8);
+  z-index: 5;
+}
+
+.mouse-wheel-cylinder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  pointer-events: none;
+  transition: transform 0.08s linear;
+}
+
+/* Wheel Tread Grooves */
+.wheel-tread {
+  display: block;
+  width: 5px;
+  height: 2px;
+  background: var(--accent-color);
+  border-radius: 1px;
+  box-shadow: 0 0 3px var(--accent-color);
+}
+
+/* Wheel Center Core */
+.mouse-wheel-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 8px;
+  background: linear-gradient(to bottom, #fff, var(--accent-color));
+  border-radius: 2px;
+  opacity: 0.85;
+  pointer-events: none;
+  box-shadow: 0 0 6px var(--accent-color);
+}
+
+/* Idle Breathing Wheel Animation */
+.mouse-scroll-container:not(.is-scrolling) .mouse-wheel-cylinder {
+  animation: wheelIdlePulse 2.4s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+
+@keyframes wheelIdlePulse {
+  0% {
+    transform: translate(-50%, -20px);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, -12px);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -20px);
+    opacity: 0.8;
+  }
+}
+
+/* Spinning Wheel During Active Scroll */
+.is-scrolling.direction-down .wheel-tread {
+  background: var(--accent-alt);
+  box-shadow: 0 0 5px var(--accent-alt);
+}
+
+.is-scrolling.direction-down .mouse-wheel-core {
+  background: linear-gradient(to bottom, #fff, var(--accent-alt));
+  box-shadow: 0 0 8px var(--accent-alt);
+}
+
+/* DPI Switch Button */
+.mouse-dpi-switch {
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: var(--ink-faint);
+  border-radius: 1px;
+  opacity: 0.7;
+}
+
+.is-scrolling .mouse-dpi-switch {
+  background: var(--terminal-text);
+  box-shadow: 0 0 4px var(--terminal-glow);
+}
+
+/* RGB Edge Accent Strip */
+.mouse-rgb-rail {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-alt));
+  opacity: 0.5;
+  transition: opacity var(--duration-fast);
+}
+
+.is-scrolling .mouse-rgb-rail {
+  opacity: 1;
+  box-shadow: 0 0 8px var(--accent-color);
+}
+
+/* Palm Arch and OM Branding */
+.mouse-palm-curve {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mouse-logo-mark {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: var(--ink-faint);
+  opacity: 0.6;
+  transition: color var(--duration-fast), opacity var(--duration-fast);
+}
+
+.is-scrolling .mouse-logo-mark {
+  color: var(--accent-alt);
+  opacity: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SCROLL CHEVRONS (CASCADING PULSE ON SCROLL)
+   ═══════════════════════════════════════════════════════════════════ */
+
+.mouse-scroll-chevrons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: -2px;
+  margin-top: -2px;
+  height: 22px;
+}
+
+.scroll-chevron-arrow {
+  font-size: 0.95rem;
+  line-height: 8px;
+  color: var(--ink-muted);
+  opacity: 0.4;
+  transition: all var(--duration-fast);
+}
+
+/* Idle Breathing Wave */
+.mouse-scroll-container:not(.is-scrolling) .arr-1 {
+  animation: chevronIdle 1.8s infinite 0s ease-in-out;
+}
+.mouse-scroll-container:not(.is-scrolling) .arr-2 {
+  animation: chevronIdle 1.8s infinite 0.25s ease-in-out;
+}
+.mouse-scroll-container:not(.is-scrolling) .arr-3 {
+  animation: chevronIdle 1.8s infinite 0.5s ease-in-out;
+}
+
+@keyframes chevronIdle {
+  0%, 100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.8;
+    color: var(--accent-color);
+    transform: translateY(3px);
+  }
+}
+
+/* Active Scrolling Pulse Cascade */
+.is-scrolling .arr-1 {
+  animation: chevronActiveScroll 0.4s infinite 0s ease-out;
+}
+.is-scrolling .arr-2 {
+  animation: chevronActiveScroll 0.4s infinite 0.12s ease-out;
+}
+.is-scrolling .arr-3 {
+  animation: chevronActiveScroll 0.4s infinite 0.24s ease-out;
+}
+
+@keyframes chevronActiveScroll {
+  0% {
+    opacity: 0.3;
+    transform: translateY(-2px);
+    color: var(--ink-muted);
+  }
+  50% {
+    opacity: 1;
+    color: var(--accent-alt);
+    text-shadow: 0 0 8px var(--accent-alt);
+    transform: translateY(3px) scale(1.2);
+  }
+  100% {
+    opacity: 0.2;
+    transform: translateY(6px);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CAPTION & DYNAMIC STATUS DISPLAY
+   ═══════════════════════════════════════════════════════════════════ */
+
+.mouse-scroll-caption {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.mouse-caption-text {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  transition: color var(--duration-fast);
+}
+
+.is-scrolling .mouse-caption-text {
+  color: var(--accent-color);
+}
+
+.caption-live-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--accent-alt);
+  font-weight: 800;
+  animation: captionGlow 0.6s infinite alternate ease-in-out;
+}
+
+@keyframes captionGlow {
+  from {
+    text-shadow: 0 0 3px var(--accent-alt);
+  }
+  to {
+    text-shadow: 0 0 10px var(--accent-alt);
+  }
+}
+
+.mouse-speed-chip {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  background: hsla(192, 92%, 52%, 0.16);
+  color: var(--accent-alt);
+  border: 1px solid var(--accent-alt);
+  padding: 1px 5px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  animation: chipPulse 0.5s infinite alternate ease-in-out;
+}
+
+@keyframes chipPulse {
+  from {
+    opacity: 0.8;
+  }
+  to {
+    opacity: 1;
+    box-shadow: 0 0 6px var(--accent-alt);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   RESPONSIVE DESIGN
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  .mouse-hero-variant {
+    bottom: 18px;
+  }
+
+  .mouse-floating-variant {
+    bottom: 18px;
+    right: 18px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .floating-progress-ring {
+    width: 54px;
+    height: 54px;
+    top: -2px;
+    left: -2px;
+  }
+
+  .mouse-floating-variant .mouse-device {
+    transform: scale(0.55);
+  }
+}
+
+@media (max-width: 640px) {
+  .mouse-hero-variant {
+    /* Kept visible on mobile with compact styling so mobile users also get tactile scroll */
+    bottom: 14px;
+    transform: translateX(-50%) scale(0.88);
+  }
+
+  .mouse-floating-variant {
+    bottom: 14px;
+    right: 14px;
+    width: 46px;
+    height: 46px;
+  }
+}

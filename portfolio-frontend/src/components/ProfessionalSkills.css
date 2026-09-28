@@ -1,50 +1,60 @@
 /* ═══════════════════════════════════════════════════════════════════
-   ProfessionalSkills — Clipboard with skill tags
+   ProfessionalSkills — Clipboard with skill progress tags
    ═══════════════════════════════════════════════════════════════════ */
 
 .skills-clipboard {
-  width: min(100%, 320px);
-  min-height: 400px;
-  background-color: hsl(25, 48%, 36%);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: 100%;
+  min-height: 520px;
+  background-color: hsl(25, 45%, 32%);
   border-radius: var(--radius-md);
   position: relative;
-  padding: var(--space-6) var(--space-4) var(--space-4);
-  transform: rotate(-2deg);
+  padding: var(--space-8) var(--space-4) var(--space-4);
+  transform: rotate(-1deg);
   transition: transform var(--duration-normal) var(--ease-spring),
               box-shadow var(--duration-normal) var(--ease-out);
   box-shadow: var(--shadow-xl),
-              inset 0 0 10px hsla(0, 0%, 0%, 0.3);
+              inset 0 0 10px hsla(0, 0%, 0%, 0.35);
   z-index: 5;
+  outline: none;
 }
 
 .skills-clipboard:hover {
-  transform: rotate(0deg) translateY(-5px);
+  transform: rotate(0deg) translateY(-6px);
   box-shadow: var(--shadow-2xl);
   z-index: 15;
 }
 
+.skills-clipboard:focus-visible {
+  outline: 2px solid var(--accent-alt);
+}
+
 .clipboard-clip {
-  width: 120px;
-  height: 40px;
-  background-color: hsl(210, 5%, 76%);
+  width: 140px;
+  height: 44px;
+  background: linear-gradient(180deg, #d6d9dc 0%, #9ca3af 100%);
   border-radius: var(--radius-sm);
   position: absolute;
-  top: -10px;
+  top: -12px;
   left: 50%;
   transform: translateX(-50%);
   box-shadow: var(--shadow-md),
               inset 0 2px 5px hsla(0, 0%, 100%, 0.6);
   z-index: 10;
+  border: 1px solid #777;
 }
 
 .clipboard-clip::after {
   content: '';
-  width: 80px;
-  height: 10px;
-  background-color: hsl(210, 5%, 50%);
+  width: 90px;
+  height: 12px;
+  background-color: #555;
   position: absolute;
-  bottom: 5px;
-  left: 20px;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
   border-radius: 2px;
 }
 
@@ -52,69 +62,148 @@
   background-color: var(--paper);
   width: 100%;
   height: 100%;
-  border-radius: 2px;
-  padding: var(--space-8) var(--space-5) var(--space-5);
+  border-radius: 4px;
+  padding: var(--space-6) var(--space-4) var(--space-4);
   box-shadow: var(--shadow-sm);
   font-family: var(--font-mono);
+  display: flex;
+  flex-direction: column;
+}
+
+.skills-header {
+  text-align: center;
+  border-bottom: 2px dashed var(--line-soft);
+  padding-bottom: var(--space-3);
+  margin-bottom: var(--space-4);
 }
 
 .skills-title {
-  text-align: center;
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: hsl(210, 29%, 24%);
-  border-bottom: 2px dashed hsl(210, 5%, 76%);
-  padding-bottom: var(--space-3);
-  margin-top: var(--space-1);
-  margin-bottom: var(--space-5);
+  margin: 0 0 8px 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--ink);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-.skills-category {
-  margin-bottom: var(--space-6);
-}
-
-.skills-category h3 {
-  font-size: var(--text-base);
-  color: var(--danger);
-  margin: 0 0 var(--space-3);
-}
-
-.skills-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.skills-tab-bar {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
+  justify-content: center;
+  gap: 6px;
 }
 
-.skill-item {
-  background-color: hsl(210, 20%, 94%);
-  color: hsl(210, 29%, 24%);
-  padding: var(--space-1) var(--space-3);
-  font-size: var(--text-sm);
-  font-weight: bold;
+.skills-tab-btn {
+  background: var(--surface-dark);
+  border: 1px solid var(--line-subtle);
+  color: var(--ink-faint);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 3px 8px;
   border-radius: var(--radius-sm);
-  border: 1px solid hsl(210, 10%, 82%);
-  display: inline-block;
-  transition: background-color var(--duration-fast) var(--ease-out),
-              color var(--duration-fast) var(--ease-out),
-              box-shadow var(--duration-fast) var(--ease-out);
+  cursor: pointer;
+  transition: all var(--duration-fast);
 }
 
-.skill-item:hover {
-  background-color: var(--accent-color);
-  color: white;
+.skills-tab-btn:hover {
+  color: var(--ink);
+}
+
+.skills-tab-btn.tab-active {
+  background: var(--accent-color);
+  color: #fff;
   border-color: var(--accent-color);
-  box-shadow: var(--shadow-glow-accent);
+}
+
+.skills-category {
+  margin-bottom: var(--space-4);
+}
+
+.category-title {
+  font-size: 0.78rem;
+  color: var(--accent-alt);
+  margin: 0 0 8px;
+  letter-spacing: 0.5px;
+}
+
+.skills-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.skill-badge-card {
+  background: var(--surface-glass);
+  border: 1px solid var(--line-subtle);
+  border-radius: var(--radius-sm);
+  padding: 5px 8px;
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+
+.skill-badge-card:hover,
+.skill-badge-card.skill-highlighted {
+  border-color: var(--accent-color);
+  background: hsla(24, 95%, 58%, 0.08);
+  transform: translateX(4px);
+}
+
+.skill-badge-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3px;
+}
+
+.skill-name {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.skill-level {
+  font-size: 0.7rem;
+  color: var(--accent-color);
+  font-weight: 700;
+}
+
+.skill-bar-track {
+  width: 100%;
+  height: 4px;
+  background: var(--line-soft);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-alt), var(--accent-color));
+  border-radius: var(--radius-full);
+  transition: width 600ms var(--ease-spring);
+}
+
+.skill-detail-box {
+  margin-top: auto;
+  padding: 8px 10px;
+  background: var(--surface-dark);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--accent-alt);
+  font-size: 0.72rem;
+  color: var(--ink-muted);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.detail-prefix {
+  color: var(--accent-alt);
+  font-weight: bold;
 }
 
 @media (max-width: 640px) {
   .skills-clipboard {
     transform: rotate(0deg);
     margin: 0 auto;
-    padding: var(--space-5) var(--space-3) var(--space-4);
+    padding: var(--space-6) var(--space-3) var(--space-3);
   }
 }

@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════
-   ProfileHero — Full-viewport hero with game decorations
+   ProfileHero — Full-viewport hero with game decorations & stickers
    ═══════════════════════════════════════════════════════════════════ */
 
 .profile-hero {
@@ -12,9 +12,9 @@
   padding: clamp(36px, 5vw, 64px) 0 84px;
   isolation: isolate;
   background:
-    radial-gradient(circle at top left, hsla(0, 0%, 100%, 0.5), transparent 30%),
-    radial-gradient(circle at 85% 20%, hsla(16, 75%, 55%, 0.10), transparent 26%),
-    radial-gradient(circle at 15% 80%, hsla(196, 82%, 32%, 0.08), transparent 28%);
+    radial-gradient(circle at top left, hsla(192, 92%, 52%, 0.08), transparent 30%),
+    radial-gradient(circle at 85% 20%, hsla(24, 95%, 58%, 0.08), transparent 26%),
+    radial-gradient(circle at 15% 80%, hsla(192, 92%, 52%, 0.06), transparent 28%);
 }
 
 .hero-content {
@@ -31,7 +31,7 @@
 .hero-left {
   flex: 2;
   max-width: 720px;
-  height: clamp(280px, 38vw, 380px);
+  min-height: clamp(340px, 40vw, 420px);
 }
 
 .hero-right {
@@ -41,199 +41,218 @@
   align-items: center;
 }
 
-/* ── Game Sprite Decorations ──────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════
+   HERO DIE-CUT VINYL STICKERS
+   ═══════════════════════════════════════════════════════════════════ */
 
-.pixel-sprite {
+.hero-diecut-sticker {
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  transition: transform 220ms var(--ease-spring),
+              box-shadow 220ms var(--ease-out),
+              filter 220ms var(--ease-out);
   position: absolute;
-  top: 18%;
-  right: 8%;
-  width: 58px;
-  height: 58px;
+}
+
+.hero-diecut-sticker:hover {
+  animation-play-state: paused !important;
+  transform: translateY(-8px) scale(1.14) !important;
+  z-index: 25 !important;
+}
+
+.hero-diecut-sticker:focus-visible {
+  outline: 2px solid var(--accent-alt);
+}
+
+/* Glossy reflection sheen across stickers */
+.hero-sticker-sheen {
+  position: absolute;
+  top: -40%;
+  left: -40%;
+  width: 180%;
+  height: 180%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.15) 35%,
+    transparent 60%
+  );
+  pointer-events: none;
+  transform: rotate(25deg);
+  opacity: 0.6;
+}
+
+/* ── 1. Companion Pixel Sprite Sticker ────────────────────────────── */
+.pixel-sprite {
+  top: 16%;
+  right: 7%;
+  width: 70px;
+  height: 70px;
   border-radius: var(--radius-md);
-  background: linear-gradient(180deg, hsl(195, 80%, 75%) 0%, hsl(195, 55%, 58%) 100%);
-  border: 3px solid var(--ink);
+  background: linear-gradient(180deg, #6ee7b7 0%, #059669 100%);
+  border: 3px solid #ffffff;
   box-shadow:
-    0 0 0 4px hsla(0, 0%, 100%, 0.25),
-    0 10px 18px hsla(0, 0%, 0%, 0.2),
-    0 0 16px hsla(195, 80%, 65%, 0.3);
+    0 10px 24px rgba(0, 0, 0, 0.4),
+    0 2px 6px rgba(0, 0, 0, 0.25),
+    0 0 0 2px hsla(0, 0%, 100%, 0.8),
+    0 0 20px hsla(160, 85%, 55%, 0.3);
   image-rendering: pixelated;
   z-index: 9;
-  animation: spriteFloat 3.4s ease-in-out infinite;
+  animation: spriteFloat 3.8s ease-in-out infinite;
+  overflow: hidden;
 }
 
-.pixel-sprite::before,
-.pixel-sprite::after {
-  content: "";
-  position: absolute;
-}
-
-.pixel-sprite::before {
-  left: -8px;
-  right: -8px;
-  bottom: -12px;
-  height: 8px;
-  border-radius: var(--radius-full);
-  background: hsla(222, 28%, 17%, 0.2);
-  filter: blur(2px);
-}
-
-.pixel-sprite::after {
-  top: -7px;
-  left: 9px;
-  width: 40px;
-  height: 10px;
-  border-radius: var(--radius-sm);
-  background: hsl(45, 90%, 80%);
-  border: 2px solid var(--ink);
+.pixel-sprite:hover {
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.55),
+    0 0 25px hsla(160, 85%, 55%, 0.5),
+    0 0 0 4px #ffffff;
 }
 
 .sprite-eye {
   position: absolute;
-  top: 23px;
-  width: 8px;
-  height: 8px;
-  background: var(--ink);
+  top: 26px;
+  width: 10px;
+  height: 10px;
+  background: #111827;
   border-radius: 2px;
   animation: spriteBlink 4.5s infinite;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
-.eye-left  { left: 15px; }
-.eye-right { right: 15px; }
+.eye-left  { left: 18px; }
+.eye-right { right: 18px; }
 
-.pokeball-orb {
-  position: absolute;
-  left: 7%;
-  top: 22%;
-  width: 54px;
-  height: 54px;
-  border-radius: var(--radius-full);
-  border: 3px solid var(--ink);
-  background: linear-gradient(180deg, hsl(0, 72%, 62%) 0 48%, var(--ink) 48% 52%, hsl(0, 0%, 97%) 52% 100%);
-  box-shadow: 0 10px 18px hsla(222, 28%, 17%, 0.2),
-              0 0 12px hsla(0, 72%, 62%, 0.2);
-  z-index: 8;
-  animation: pokeballBob 4.2s ease-in-out infinite;
-}
-
-.pokeball-center {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 16px;
-  height: 16px;
-  transform: translate(-50%, -50%);
-  border-radius: var(--radius-full);
-  background: #fff;
-  border: 3px solid var(--ink);
-}
-
+/* ── 2. Voxel Grass Block Sticker ─────────────────────────────────── */
 .minecraft-block {
-  position: absolute;
-  right: 12%;
-  bottom: 18%;
-  width: 62px;
-  height: 62px;
-  border: 3px solid hsl(80, 16%, 18%);
-  border-radius: 4px;
-  background: linear-gradient(180deg, hsl(105, 42%, 44%) 0 40%, hsl(28, 45%, 35%) 40% 100%);
-  box-shadow: 0 12px 18px hsla(80, 16%, 18%, 0.24),
-              0 0 10px hsla(105, 42%, 44%, 0.15);
+  right: 10%;
+  bottom: 14%;
+  width: 74px;
+  height: 74px;
+  border: 3px solid #ffffff;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #5b8c32 0 42%, #795548 42% 100%);
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.4),
+    0 2px 6px rgba(0, 0, 0, 0.25),
+    0 0 0 2px hsla(0, 0%, 100%, 0.8),
+    0 0 20px hsla(90, 70%, 45%, 0.25);
   z-index: 8;
-  animation: blockPulse 3.6s ease-in-out infinite;
+  animation: blockPulse 4s ease-in-out infinite;
+  overflow: hidden;
+}
+
+.minecraft-block:hover {
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.55),
+    0 0 25px hsla(90, 70%, 45%, 0.45),
+    0 0 0 4px #ffffff;
 }
 
 .block-pixel {
   position: absolute;
-  width: 9px;
-  height: 9px;
-  background: hsla(0, 0%, 0%, 0.18);
+  width: 11px;
+  height: 11px;
+  background: hsla(0, 0%, 0%, 0.2);
 }
 
-.p1 { top: 8px;    left: 10px;  }
-.p2 { top: 16px;   right: 12px; }
-.p3 { bottom: 18px; left: 18px; }
-.p4 { bottom: 8px;  right: 8px; }
+.p1 { top: 9px;   left: 12px; }
+.p2 { top: 18px;  right: 14px; }
+.p3 { bottom: 20px; left: 20px; }
+.p4 { bottom: 10px; right: 10px; }
 
+/* ── 3. Cyber Racer Physics Rig Decal ─────────────────────────────── */
 .race-car {
-  position: absolute;
-  left: 9%;
-  bottom: 14%;
-  width: 86px;
-  height: 22px;
-  border-radius: 12px 16px 8px 10px;
-  border: 2px solid hsla(222, 22%, 17%, 0.9);
-  background: linear-gradient(90deg, hsl(222, 22%, 21%) 0 55%, hsl(222, 15%, 38%) 55% 100%);
-  box-shadow: 0 8px 14px hsla(222, 22%, 14%, 0.2);
-  opacity: 0.88;
+  left: 8%;
+  bottom: 12%;
+  width: 102px;
+  height: 30px;
+  border-radius: 12px 18px 8px 10px;
+  border: 3px solid #ffffff;
+  background: linear-gradient(90deg, #1e293b 0 55%, #0ea5e9 55% 100%);
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.4),
+    0 2px 6px rgba(0, 0, 0, 0.25),
+    0 0 0 2px hsla(0, 0%, 100%, 0.8),
+    0 0 20px hsla(192, 92%, 52%, 0.3);
   z-index: 8;
-  animation: carIdle 3.2s ease-in-out infinite;
+  animation: carIdle 3.4s ease-in-out infinite;
+}
+
+.race-car:hover {
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.55),
+    0 0 25px hsla(192, 92%, 52%, 0.5),
+    0 0 0 4px #ffffff;
 }
 
 .race-car::before,
 .race-car::after {
   content: "";
   position: absolute;
-  border: 2px solid hsla(222, 22%, 17%, 0.9);
-  background: hsl(222, 18%, 28%);
+  background: #334155;
+  border: 2px solid #ffffff;
 }
 
 .race-car::before {
   left: -9px;
-  bottom: 5px;
+  bottom: 6px;
   width: 10px;
   height: 8px;
   border-radius: 2px;
 }
 
 .race-car::after {
-  right: -6px;
-  top: 3px;
+  right: -7px;
+  top: 4px;
   width: 6px;
-  height: 14px;
+  height: 16px;
   border-radius: 2px;
 }
 
 .car-cabin {
   position: absolute;
-  top: -8px;
-  left: 34px;
-  width: 18px;
-  height: 10px;
-  border-radius: 8px 8px 0 0;
-  background: linear-gradient(180deg, hsl(205, 45%, 80%) 0%, hsl(205, 35%, 62%) 100%);
-  border: 2px solid hsla(222, 22%, 17%, 0.9);
+  top: -10px;
+  left: 40px;
+  width: 22px;
+  height: 12px;
+  border-radius: 10px 10px 0 0;
+  background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
+  border: 2px solid #ffffff;
   border-bottom: 0;
 }
 
 .car-wheel {
   position: absolute;
-  bottom: -8px;
-  width: 14px;
-  height: 14px;
+  bottom: -10px;
+  width: 16px;
+  height: 16px;
   border-radius: var(--radius-full);
-  background: hsl(222, 22%, 12%);
-  border: 2px solid hsl(222, 15%, 42%);
+  background: #0f172a;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-.wheel-front { right: 12px; }
-.wheel-back  { left: 12px; }
+.wheel-front { right: 14px; }
+.wheel-back  { left: 14px; }
 
 .car-wheel::after {
   content: "";
   position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 4px;
-  height: 4px;
+  top: 3px;
+  left: 3px;
+  width: 6px;
+  height: 6px;
   border-radius: var(--radius-full);
-  background: hsl(222, 10%, 65%);
+  background: #38bdf8;
 }
 
 /* ── Animations ───────────────────────────────────────────────────── */
 
 @keyframes spriteFloat {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-8px); }
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-10px) rotate(3deg); }
 }
 
 @keyframes spriteBlink {
@@ -241,73 +260,17 @@
   46%                 { transform: scaleY(0.2); }
 }
 
-@keyframes pokeballBob {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-6px); }
-}
-
 @keyframes blockPulse {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50%      { transform: translateY(-4px) scale(1.03); }
+  0%, 100% { transform: translateY(0) scale(1) rotate(-2deg); }
+  50%      { transform: translateY(-6px) scale(1.05) rotate(1deg); }
 }
 
 @keyframes carIdle {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-4px); }
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-6px) rotate(-1deg); }
 }
 
-/* ── Scroll Indicator ─────────────────────────────────────────────── */
-
-.scroll-indicator {
-  position: absolute;
-  bottom: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  opacity: 0.6;
-  animation: fadeInUp 1s var(--ease-out) 1.5s both;
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 0.6; transform: translateY(0); }
-}
-
-.scroll-indicator p {
-  font-family: var(--font-mono);
-  margin: 0;
-  color: var(--ink-muted);
-  font-weight: bold;
-  text-transform: uppercase;
-  font-size: var(--text-xs);
-  letter-spacing: 1px;
-}
-
-.mouse {
-  width: 24px;
-  height: 36px;
-  border: 2px solid var(--ink-muted);
-  border-radius: var(--radius-md);
-  position: relative;
-}
-
-.wheel {
-  width: 4px;
-  height: 6px;
-  background-color: var(--ink-muted);
-  border-radius: 2px;
-  position: absolute;
-  top: 6px;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: scrollWheel 2s infinite ease-in-out;
-}
-
-@keyframes scrollWheel {
-  0%   { transform: translate(-50%, 0); opacity: 1; }
-  100% { transform: translate(-50%, 15px); opacity: 0; }
-}
+/* ── Scroll Indicator styles are managed in MouseScrollIndicator.css ── */
 
 /* ═══════════════════════════════════════════════════════════════════
    RESPONSIVE
@@ -326,52 +289,28 @@
   }
 
   .pixel-sprite {
-    top: 12%;
-    right: 6%;
-    width: 48px;
-    height: 48px;
-  }
-
-  .pokeball-orb {
-    left: 4%;
-    top: 18%;
-    width: 46px;
-    height: 46px;
+    top: 10%;
+    right: 4%;
+    width: 54px;
+    height: 54px;
   }
 
   .minecraft-block {
-    right: 6%;
-    bottom: 14%;
-    width: 52px;
-    height: 52px;
+    right: 4%;
+    bottom: 8%;
+    width: 56px;
+    height: 56px;
   }
 
   .race-car {
-    left: 5%;
-    bottom: 10%;
-    width: 72px;
-    height: 20px;
+    left: 4%;
+    bottom: 6%;
+    width: 80px;
+    height: 24px;
   }
-
-  .car-cabin {
-    top: -7px;
-    left: 28px;
-    width: 15px;
-    height: 9px;
-  }
-
-  .car-wheel {
-    width: 12px;
-    height: 12px;
-    bottom: -7px;
-  }
-
-  .sprite-eye { top: 19px; }
-  .eye-left   { left: 12px; }
-  .eye-right  { right: 12px; }
 
   .hero-left {
-    height: 300px;
+    min-height: 320px;
     width: 100%;
   }
 }
@@ -382,12 +321,7 @@
     padding: 0 12px;
   }
 
-  .hero-left {
-    height: 260px;
-  }
-
   .pixel-sprite,
-  .pokeball-orb,
   .minecraft-block,
   .race-car,
   .scroll-indicator {

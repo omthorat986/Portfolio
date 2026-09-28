@@ -1,48 +1,71 @@
 import React from 'react';
 import TerminalBio from './TerminalBio';
 import StudioBadge from './StudioBadge';
+import PokeballSticker from './PokeballSticker';
+import CarSticker from './CarSticker';
+import MouseScrollIndicator from './MouseScrollIndicator';
+import { sounds } from '../utils/soundEffects';
 import './ProfileHero.css';
 
-export default function ProfileHero() {
+export default function ProfileHero({ onOpenProject, onOpenDossier, onToast }) {
+  const handleItemClick = (name, toastMsg) => {
+    sounds.playMechanicalClick();
+    if (onToast) onToast(toastMsg || `${name} sticker inspected! 🎮`);
+  };
+
   return (
-    <section className="profile-hero desk-environment">
+    <section className="profile-hero" id="hero-section">
       <div className="hero-content">
         <div className="hero-left module-terminal">
-          <TerminalBio />
+          <TerminalBio
+            onOpenProject={onOpenProject}
+            onOpenDossier={onOpenDossier}
+            onToast={onToast}
+          />
         </div>
         <div className="hero-right module-badge">
-          <StudioBadge />
+          <StudioBadge onOpenDossier={onOpenDossier} />
         </div>
       </div>
 
-      <div className="pixel-sprite" aria-hidden="true">
+      {/* ── Realistic Die-Cut Pokéball Sticker ── */}
+      <PokeballSticker onToast={onToast} />
+
+      {/* ── Cyber Racer Supercar Die-Cut Sticker ── */}
+      <CarSticker onToast={onToast} />
+
+      {/* ── Companion Pixel Sprite Vinyl Sticker ── */}
+      <div
+        className="pixel-sprite hero-diecut-sticker"
+        role="button"
+        tabIndex={0}
+        title="8-Bit Ghost Companion Sticker (Click to pet)"
+        onClick={() => handleItemClick('Companion Sprite', 'Pixel Companion: "Beep boop! Ready to code!" 👾')}
+        onKeyDown={(e) => { if (e.key === 'Enter') handleItemClick('Companion Sprite', 'Pixel Companion: "Beep boop! Ready to code!" 👾'); }}
+      >
         <span className="sprite-eye eye-left"></span>
         <span className="sprite-eye eye-right"></span>
+        <div className="hero-sticker-sheen" aria-hidden="true" />
       </div>
 
-      <div className="pokeball-orb" aria-hidden="true">
-        <span className="pokeball-center"></span>
-      </div>
-
-      <div className="minecraft-block" aria-hidden="true">
+      {/* ── Voxel Grass Block Die-Cut Sticker ── */}
+      <div
+        className="minecraft-block hero-diecut-sticker"
+        role="button"
+        tabIndex={0}
+        title="Voxel Grass Block Sticker (Click to mine)"
+        onClick={() => handleItemClick('Voxel Terrain', 'Mined 1x Voxel Grass Block! [Inventory +1] ⛏️')}
+        onKeyDown={(e) => { if (e.key === 'Enter') handleItemClick('Voxel Terrain', 'Mined 1x Voxel Grass Block! [Inventory +1] ⛏️'); }}
+      >
         <span className="block-pixel p1"></span>
         <span className="block-pixel p2"></span>
         <span className="block-pixel p3"></span>
         <span className="block-pixel p4"></span>
+        <div className="hero-sticker-sheen" aria-hidden="true" />
       </div>
 
-      <div className="race-car" aria-hidden="true">
-        <span className="car-cabin"></span>
-        <span className="car-wheel wheel-front"></span>
-        <span className="car-wheel wheel-back"></span>
-      </div>
-
-      <div className="scroll-indicator">
-        <span className="mouse">
-          <span className="wheel"></span>
-        </span>
-        <p>Scroll to Explore</p>
-      </div>
+      {/* ── Dynamic Mouse Scroll Indicator with Scroll-Driven Animation ── */}
+      <MouseScrollIndicator targetId="section-skills" onToast={onToast} variant="hero" />
     </section>
   );
 }

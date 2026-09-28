@@ -1,0 +1,194 @@
+/* ═══════════════════════════════════════════════════════════════════
+   PokeballSticker — Interactive Die-Cut Vinyl Pokéball Sticker
+   ═══════════════════════════════════════════════════════════════════ */
+
+.pokeball-sticker-wrapper {
+  position: absolute;
+  left: 6%;
+  top: 20%;
+  z-index: 15;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+  animation: pokeballFloat 4.2s ease-in-out infinite;
+  transition: transform 220ms var(--ease-spring);
+}
+
+.pokeball-sticker-wrapper:hover {
+  animation-play-state: paused;
+  transform: translateY(-8px) scale(1.12);
+}
+
+.pokeball-sticker-wrapper:focus-visible {
+  outline: 2px solid var(--accent-alt);
+  border-radius: var(--radius-full);
+}
+
+/* Floating ambient movement */
+@keyframes pokeballFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(4deg);
+  }
+}
+
+/* ── Die-Cut Vinyl Sticker Border ─────────────────────────────────── */
+.pokeball-diecut {
+  width: 86px;
+  height: 86px;
+  position: relative;
+  border-radius: var(--radius-full);
+  background: #ffffff;
+  padding: 5px;
+  box-shadow:
+    0 10px 24px hsla(0, 0%, 0%, 0.4),
+    0 2px 6px hsla(0, 0%, 0%, 0.25),
+    0 0 0 2px hsla(0, 0%, 100%, 0.8),
+    0 0 16px hsla(0, 85%, 60%, 0.2);
+  transition: box-shadow 250ms var(--ease-out),
+              transform 250ms var(--ease-spring);
+}
+
+.pokeball-sticker-wrapper:hover .pokeball-diecut {
+  box-shadow:
+    0 16px 36px hsla(0, 0%, 0%, 0.55),
+    0 0 25px hsla(0, 85%, 60%, 0.4),
+    0 0 0 3px #ffffff;
+}
+
+.pokeball-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Pulsing Center LED */
+.pokeball-led {
+  animation: ledGlow 2.2s infinite ease-in-out;
+}
+
+@keyframes ledGlow {
+  0%, 100% {
+    fill: #ffffff;
+    filter: drop-shadow(0 0 2px #ffffff);
+  }
+  50% {
+    fill: #e0f7fa;
+    filter: drop-shadow(0 0 6px #00e5ff);
+  }
+}
+
+/* 3D Peel corner on vinyl sticker */
+.pokeball-peel-corner {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, transparent 50%, rgba(200, 200, 200, 0.45) 50%);
+  border-top-left-radius: 3px;
+  pointer-events: none;
+}
+
+/* ── Wobble Animation on Click (Game Capture Physics) ─────────────── */
+.pokeball-sticker-wrapper.ball-wiggling .pokeball-diecut {
+  animation: captureWiggle 450ms ease-in-out;
+}
+
+@keyframes captureWiggle {
+  0%   { transform: rotate(0deg) scale(0.95); }
+  25%  { transform: rotate(-22deg) scale(1.05); }
+  50%  { transform: rotate(22deg) scale(1.05); }
+  75%  { transform: rotate(-12deg) scale(1.02); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+/* Click Capture Flash */
+.pokeball-sticker-wrapper.ball-captured .pokeball-diecut {
+  box-shadow:
+    0 0 35px #ffeb3b,
+    0 0 50px #ff9800,
+    0 0 0 4px #ffffff;
+  transform: scale(1.18);
+}
+
+/* ── Hover Tooltip Badge ──────────────────────────────────────────── */
+.pokeball-tooltip {
+  margin-top: 8px;
+  background: var(--paper);
+  border: 1px solid var(--line-soft);
+  box-shadow: var(--shadow-md);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  opacity: 0;
+  transform: translateY(4px);
+  pointer-events: none;
+  transition: opacity 200ms ease, transform 200ms var(--ease-spring);
+  white-space: nowrap;
+}
+
+.pokeball-sticker-wrapper:hover .pokeball-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tooltip-name {
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.tooltip-rate {
+  font-weight: 700;
+  color: var(--accent-color);
+  background: hsla(24, 95%, 58%, 0.12);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1100px) {
+  .pokeball-sticker-wrapper {
+    left: 3%;
+    top: 16%;
+  }
+  .pokeball-diecut {
+    width: 72px;
+    height: 72px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pokeball-sticker-wrapper {
+    left: 4%;
+    top: 14%;
+  }
+  .pokeball-diecut {
+    width: 62px;
+    height: 62px;
+    padding: 4px;
+  }
+  .pokeball-tooltip {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .pokeball-sticker-wrapper {
+    display: none;
+  }
+}
