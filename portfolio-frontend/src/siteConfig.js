@@ -8,6 +8,7 @@
 // ── Personal ────────────────────────────────────────────────────────
 export const personal = {
   name: 'OM',
+  brandName: 'clutch_game',
   fullName: 'Om Thorat',
   title: 'Gameplay & Systems Programmer',
   roleSubtitle: 'C++ / C# / Game Engine Architecture / Unity',
