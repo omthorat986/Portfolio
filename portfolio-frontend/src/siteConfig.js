@@ -12,12 +12,12 @@ export const personal = {
   fullName: 'Om Thorat',
   title: 'Gameplay & Systems Programmer',
   roleSubtitle: 'C++ / C# / Game Engine Architecture / Unity',
-  department: 'Engineering Dept // Level 02',
-  badgeId: 'ID: 0x8F9B2C',
+  department: 'Game Systems & Engine Architecture',
+  badgeId: 'DEV-ID: OM-THORAT',
   location: 'Available Globally / Remote',
   avatar: './images/avatar.jpg',
   status: 'OPEN FOR OPPORTUNITIES',
-  bio: 'Systems and gameplay programmer passionate about physics simulation, cache-friendly architecture, and responsive combat feel.',
+  bio: 'Personal Game Developer Portfolio — passionate about low-latency physics simulation, cache-friendly architecture, and responsive combat game feel.',
 };
 
 // ── Contact ─────────────────────────────────────────────────────────
@@ -94,9 +94,9 @@ export const skillLevels = [
 
 // ── Sticky Note ─────────────────────────────────────────────────────
 export const stickyNote = {
-  heading: 'URGENT BUG!',
+  heading: 'DEV SPRINT GOAL',
   body: 'Double-check broadphase AABB spatial partitioning before Friday milestone build!',
-  signature: '- Lead Dev',
+  signature: '- Om T.',
   timestamp: '11:42 PM',
 };
 
@@ -152,7 +152,7 @@ export const fallbackProjects = [
 
 // ── Confidential Dossier (Resume) ───────────────────────────────────
 export const dossierData = {
-  clearanceLevel: 'LEVEL 4 // ACTIVE AGENT',
+  clearanceLevel: 'VERIFIED // GAME DEVELOPER',
   codeName: 'OM THORAT',
   specialization: 'GAMEPLAY & SYSTEMS PROGRAMMING',
   summary:
@@ -161,7 +161,7 @@ export const dossierData = {
     {
       period: '2024 - Present',
       role: 'Gameplay & Systems Developer',
-      company: 'Indie Game Projects & Open Source',
+      company: 'Personal Game Projects & Open Source',
       bullets: [
         'Built custom C++ physics & entity simulation pipelines achieving 60 FPS performance locks.',
         'Engineered reusable Unity gameplay modules for combat systems, player movement, and inventory.',
@@ -171,7 +171,7 @@ export const dossierData = {
     {
       period: '2023 - 2024',
       role: 'Game Programming Fellow',
-      company: 'Independent Game Labs',
+      company: 'Independent Game Prototyping',
       bullets: [
         'Implemented console-based game prototypes in C# to master OOP patterns and algorithmic state machines.',
         'Developed algorithms for A* pathfinding, raycast intersections, and procedural level generation.'

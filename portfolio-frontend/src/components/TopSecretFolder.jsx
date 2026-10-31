@@ -17,27 +17,27 @@ export default function TopSecretFolder({ onOpenDossier }) {
       role="button"
       tabIndex={0}
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleClick(e); }}
-      title="Click to unlock Om Thorat's Confidential Dossier & Resume"
+      title="Click to view Om Thorat's Developer Resume & Portfolio Dossier"
     >
       <div className="folder-tab">
-        <span className="folder-tab-icon">📁</span> DOSSIER.PDF
+        <span className="folder-tab-icon">📁</span> RESUME.PDF
       </div>
 
       <div className="folder-cover">
-        <div className="confidential-stamp">CONFIDENTIAL</div>
+        <div className="confidential-stamp">DEV DOSSIER</div>
 
         <div className="folder-label">
           <div className="folder-label-header">
             <span className="folder-seal">★</span>
-            <h2>Subject: {personal.name}</h2>
+            <h2>Developer: {personal.fullName}</h2>
           </div>
-          <p>Clearance: Level 4 // Active</p>
           <p>Role: {personal.title}</p>
-          <p className="folder-status-tag">STATUS: UNLOCKED FOR HIRE</p>
+          <p>Stack: C++ / C# / Unity / Direct3D</p>
+          <p className="folder-status-tag">STATUS: AVAILABLE FOR HIRE</p>
         </div>
 
         <button type="button" className="folder-link-btn" title="Open Dossier">
-          <span>🔓</span> ACCESS FILE &amp; RESUME
+          <span>📄</span> VIEW RESUME &amp; DOSSIER
         </button>
       </div>
     </article>

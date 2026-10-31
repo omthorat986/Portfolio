@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TerminalBio from './TerminalBio';
 import StudioBadge from './StudioBadge';
+import CyberHudRibbon from './CyberHudRibbon';
+import GearLoadoutSwitcher from './GearLoadoutSwitcher';
 import PokeballSticker from './PokeballSticker';
 import CarSticker from './CarSticker';
 import MouseScrollIndicator from './MouseScrollIndicator';
@@ -8,6 +10,8 @@ import { sounds } from '../utils/soundEffects';
 import './ProfileHero.css';
 
 export default function ProfileHero({ onOpenProject, onOpenDossier, onToast }) {
+  const [turboBoostActive, setTurboBoostActive] = useState(false);
+
   const handleItemClick = (name, toastMsg) => {
     sounds.playMechanicalClick();
     if (onToast) onToast(toastMsg || `${name} sticker inspected! 🎮`);
@@ -15,6 +19,13 @@ export default function ProfileHero({ onOpenProject, onOpenDossier, onToast }) {
 
   return (
     <section className="profile-hero" id="hero-section">
+      {/* ── Real-Time Game Engine Telemetry HUD Ribbon ── */}
+      <CyberHudRibbon
+        onToast={onToast}
+        turboBoostActive={turboBoostActive}
+      />
+
+      {/* ── Main Hero Content: Terminal + Personal Developer Pass ── */}
       <div className="hero-content">
         <div className="hero-left module-terminal">
           <TerminalBio
@@ -27,6 +38,13 @@ export default function ProfileHero({ onOpenProject, onOpenDossier, onToast }) {
           <StudioBadge onOpenDossier={onOpenDossier} />
         </div>
       </div>
+
+      {/* ── Interactive Weapon & Dev Gear Loadout Switcher ── */}
+      <GearLoadoutSwitcher
+        onOpenProject={onOpenProject}
+        onToast={onToast}
+        onTurboToggle={setTurboBoostActive}
+      />
 
       {/* ── Realistic Die-Cut Pokéball Sticker ── */}
       <PokeballSticker onToast={onToast} />
@@ -69,3 +87,4 @@ export default function ProfileHero({ onOpenProject, onOpenDossier, onToast }) {
     </section>
   );
 }
+

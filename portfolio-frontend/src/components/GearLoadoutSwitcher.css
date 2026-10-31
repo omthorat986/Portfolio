@@ -1,0 +1,559 @@
+/* ═══════════════════════════════════════════════════════════════════
+   GearLoadoutSwitcher — Interactive Weapon & Dev Gear Armory
+   ═══════════════════════════════════════════════════════════════════ */
+
+.gear-loadout-container {
+  width: 100%;
+  max-width: 1240px;
+  margin: clamp(28px, 4vw, 44px) auto 0;
+  padding: 0 clamp(18px, 4vw, 40px);
+  position: relative;
+  z-index: 10;
+  transition: all 300ms var(--ease-out);
+}
+
+/* ── Header ───────────────────────────────────────────────────────── */
+.loadout-header {
+  margin-bottom: clamp(14px, 2vw, 20px);
+}
+
+.loadout-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.loadout-badge-pill {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  background: hsla(24, 95%, 58%, 0.15);
+  color: var(--accent-color);
+  border: 1px solid hsla(24, 95%, 58%, 0.35);
+  text-transform: uppercase;
+}
+
+.loadout-main-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.loadout-subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--ink-faint);
+  margin: 0;
+  max-width: 720px;
+}
+
+/* ── Weapon Selection Tabs ────────────────────────────────────────── */
+.loadout-tabs-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.loadout-tab-btn {
+  background: hsla(224, 25%, 12%, 0.7);
+  border: 1px solid hsla(210, 40%, 80%, 0.1);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  text-align: left;
+  transition: all 220ms var(--ease-out);
+}
+
+[data-theme="light"] .loadout-tab-btn {
+  background: hsla(38, 40%, 94%, 0.9);
+  border-color: hsla(224, 20%, 75%, 0.35);
+}
+
+.loadout-tab-btn:hover {
+  background: hsla(224, 25%, 16%, 0.9);
+  border-color: var(--accent-alt);
+  transform: translateY(-2px);
+}
+
+[data-theme="light"] .loadout-tab-btn:hover {
+  background: hsla(38, 50%, 99%, 0.98);
+  border-color: var(--accent-alt);
+}
+
+.loadout-tab-btn.tab-active {
+  background: hsla(224, 28%, 15%, 0.95);
+  border-color: var(--accent-alt);
+  box-shadow: 0 8px 24px hsla(0, 0%, 0%, 0.4), 0 0 16px hsla(192, 92%, 52%, 0.25);
+}
+
+/* Theme-specific active tab borders */
+.theme-overdrive .loadout-tab-btn.tab-active {
+  border-color: #38bdf8;
+  box-shadow: 0 8px 24px hsla(0, 0%, 0%, 0.4), 0 0 20px rgba(56, 189, 248, 0.3);
+}
+
+.theme-tactics .loadout-tab-btn.tab-active {
+  border-color: #34d399;
+  box-shadow: 0 8px 24px hsla(0, 0%, 0%, 0.4), 0 0 20px rgba(52, 211, 153, 0.3);
+}
+
+.theme-shaders .loadout-tab-btn.tab-active {
+  border-color: #f43f5e;
+  box-shadow: 0 8px 24px hsla(0, 0%, 0%, 0.4), 0 0 20px rgba(244, 63, 94, 0.3);
+}
+
+.tab-key-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--ink-faint);
+  background: hsla(0, 0%, 0%, 0.25);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.tab-icon {
+  font-size: 1.25rem;
+}
+
+.tab-text-wrap {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.tab-slot-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--ink-faint);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.tab-title {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tab-active-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  right: 20%;
+  height: 3px;
+  border-radius: var(--radius-full);
+  background: var(--accent-alt);
+}
+
+.theme-overdrive .tab-active-indicator { background: #38bdf8; }
+.theme-tactics .tab-active-indicator   { background: #34d399; }
+.theme-shaders .tab-active-indicator   { background: #f43f5e; }
+
+/* ── Showcase Card Stage ──────────────────────────────────────────── */
+.loadout-card-stage {
+  position: relative;
+  background: hsla(224, 30%, 9%, 0.85);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid hsla(192, 92%, 52%, 0.3);
+  border-radius: var(--radius-lg);
+  padding: clamp(18px, 2.5vw, 28px);
+  box-shadow:
+    0 16px 40px hsla(0, 0%, 0%, 0.5),
+    0 0 25px hsla(192, 92%, 52%, 0.15);
+  overflow: hidden;
+  transition: border-color 300ms ease, box-shadow 300ms ease;
+  animation: cardFadeIn 280ms var(--ease-out);
+}
+
+[data-theme="light"] .loadout-card-stage {
+  background: hsla(38, 30%, 97%, 0.94);
+  border-color: hsla(192, 85%, 45%, 0.35);
+  box-shadow: 0 16px 36px hsla(224, 25%, 30%, 0.14);
+}
+
+@keyframes cardFadeIn {
+  from { opacity: 0.7; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.theme-overdrive .loadout-card-stage {
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: 0 16px 40px hsla(0, 0%, 0%, 0.5), 0 0 30px rgba(56, 189, 248, 0.18);
+}
+
+.theme-tactics .loadout-card-stage {
+  border-color: rgba(52, 211, 153, 0.45);
+  box-shadow: 0 16px 40px hsla(0, 0%, 0%, 0.5), 0 0 30px rgba(52, 211, 153, 0.18);
+}
+
+.theme-shaders .loadout-card-stage {
+  border-color: rgba(244, 63, 94, 0.45);
+  box-shadow: 0 16px 40px hsla(0, 0%, 0%, 0.5), 0 0 30px rgba(244, 63, 94, 0.18);
+}
+
+/* Holographic scanline animation */
+.loadout-holo-scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-alt), transparent);
+  animation: scanlineMove 4s ease-in-out infinite;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+@keyframes scanlineMove {
+  0%   { top: 0%; opacity: 0; }
+  15%  { opacity: 0.8; }
+  85%  { opacity: 0.8; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Ability shockwave pulse */
+.ability-shockwave-active {
+  animation: abilityShockwave 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes abilityShockwave {
+  0% {
+    transform: scale(0.99);
+    filter: brightness(1.6);
+  }
+  50% {
+    transform: scale(1.015);
+    filter: brightness(1.2);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+/* ── Card Top Row ─────────────────────────────────────────────────── */
+.card-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid hsla(210, 30%, 80%, 0.1);
+  flex-wrap: wrap;
+}
+
+.card-slot-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--accent-alt);
+  margin-bottom: 4px;
+}
+
+.theme-overdrive .card-slot-tag { color: #38bdf8; }
+.theme-tactics .card-slot-tag   { color: #34d399; }
+.theme-shaders .card-slot-tag   { color: #f43f5e; }
+
+.card-weapon-name {
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin: 0 0 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.weapon-icon-large {
+  font-size: 1.4rem;
+}
+
+.card-category-tag {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-faint);
+}
+
+.card-engine-chip {
+  background: hsla(224, 25%, 15%, 0.8);
+  border: 1px solid hsla(210, 40%, 80%, 0.15);
+  border-radius: var(--radius-md);
+  padding: 8px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+[data-theme="light"] .card-engine-chip {
+  background: hsla(38, 40%, 93%, 0.9);
+  border-color: hsla(224, 20%, 75%, 0.4);
+}
+
+.engine-chip-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--ink-faint);
+  letter-spacing: 0.05em;
+}
+
+.engine-chip-val {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--accent-color);
+}
+
+/* ── Card Body Row ────────────────────────────────────────────────── */
+.card-body-row {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 24px;
+  padding: 18px 0;
+  align-items: stretch;
+}
+
+.card-description-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+.card-quote {
+  margin: 0;
+  font-style: italic;
+  font-family: var(--font-heading);
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  line-height: 1.5;
+  color: var(--ink);
+  border-left: 3px solid var(--accent-alt);
+  padding-left: 14px;
+}
+
+.theme-overdrive .card-quote { border-left-color: #38bdf8; }
+.theme-tactics .card-quote   { border-left-color: #34d399; }
+.theme-shaders .card-quote   { border-left-color: #f43f5e; }
+
+.card-summary {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+/* ── Stats Col ────────────────────────────────────────────────────── */
+.card-stats-col {
+  background: hsla(224, 25%, 12%, 0.6);
+  border: 1px solid hsla(210, 40%, 80%, 0.08);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+[data-theme="light"] .card-stats-col {
+  background: hsla(38, 40%, 93%, 0.7);
+  border-color: hsla(224, 20%, 75%, 0.35);
+}
+
+.stats-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: var(--ink-faint);
+  letter-spacing: 0.06em;
+  padding-bottom: 6px;
+  border-bottom: 1px solid hsla(210, 30%, 80%, 0.08);
+}
+
+.stats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.stat-label-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stat-name {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-muted);
+  font-weight: 600;
+}
+
+.stat-rank-badge {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 800;
+  padding: 1px 4px;
+  border-radius: 3px;
+  background: hsla(24, 95%, 58%, 0.2);
+  color: var(--accent-color);
+}
+
+.stat-value-text {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+/* ── Action Controls Dock ─────────────────────────────────────────── */
+.card-actions-dock {
+  display: flex;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid hsla(210, 30%, 80%, 0.1);
+  flex-wrap: wrap;
+}
+
+.deploy-ability-btn {
+  flex: 1.3;
+  min-width: 240px;
+  background: linear-gradient(135deg, var(--accent-color), hsl(24, 100%, 46%));
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 12px 20px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 18px hsla(24, 95%, 58%, 0.35);
+  transition: all 200ms var(--ease-out);
+}
+
+.theme-overdrive .deploy-ability-btn {
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  box-shadow: 0 4px 20px rgba(2, 132, 199, 0.4);
+}
+
+.theme-tactics .deploy-ability-btn {
+  background: linear-gradient(135deg, #059669, #047857);
+  box-shadow: 0 4px 20px rgba(5, 150, 105, 0.4);
+}
+
+.theme-shaders .deploy-ability-btn {
+  background: linear-gradient(135deg, #e11d48, #be123c);
+  box-shadow: 0 4px 20px rgba(225, 29, 72, 0.4);
+}
+
+.deploy-ability-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.12);
+}
+
+.deploy-ability-btn.btn-firing {
+  transform: scale(0.97);
+  filter: brightness(1.4);
+}
+
+.ability-btn-icon {
+  font-size: 1.1rem;
+}
+
+.inspect-blueprint-btn {
+  flex: 1;
+  min-width: 200px;
+  background: hsla(224, 25%, 15%, 0.7);
+  border: 1px solid hsla(210, 40%, 80%, 0.15);
+  color: var(--ink);
+  border-radius: var(--radius-md);
+  padding: 12px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 200ms var(--ease-out);
+}
+
+[data-theme="light"] .inspect-blueprint-btn {
+  background: hsla(38, 40%, 93%, 0.9);
+  border-color: hsla(224, 20%, 75%, 0.4);
+}
+
+.inspect-blueprint-btn:hover {
+  background: hsla(224, 25%, 20%, 0.9);
+  border-color: var(--accent-alt);
+  color: var(--accent-alt);
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   RESPONSIVE DESIGN
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 860px) {
+  .loadout-tabs-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .card-body-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .card-actions-dock {
+    flex-direction: column;
+  }
+
+  .deploy-ability-btn,
+  .inspect-blueprint-btn {
+    width: 100%;
+    min-width: 0;
+  }
+}

@@ -126,11 +126,11 @@ export default function TerminalBio({ onOpenProject, onOpenDossier, onToast }) {
       case 'sudo hire':
       case 'hire':
         sounds.playSuccessChirp();
-        newOutput.push({ text: '>>> [SECURITY OVERRIDE GRANTED] <<<', type: 'accent' });
-        newOutput.push({ text: `Candidate ${personal.fullName} marked: "RECOMMENDED HIRE" 🚀`, type: 'header' });
-        newOutput.push({ text: `Opening confidential dossier...`, type: 'system' });
+        newOutput.push({ text: '>>> [DEVELOPER PROFILE VERIFIED] <<<', type: 'accent' });
+        newOutput.push({ text: `${personal.fullName} // Open for Gameplay & Systems Roles 🚀`, type: 'header' });
+        newOutput.push({ text: `Opening developer resume & dossier...`, type: 'system' });
         if (onOpenDossier) onOpenDossier();
-        if (onToast) onToast('Access granted! Opening dossier...');
+        if (onToast) onToast('Opening developer resume & dossier...');
         break;
 
       default:

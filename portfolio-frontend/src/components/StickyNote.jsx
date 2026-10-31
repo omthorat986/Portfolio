@@ -51,7 +51,7 @@ export default function StickyNote({ onToast }) {
 
         <div className="sticky-footer">
           <p className="sticky-timestamp">Due: Friday 18:00</p>
-          <p className="sticky-signature">- Om &amp; Lead</p>
+          <p className="sticky-signature">- Om T.</p>
         </div>
       </div>
     </article>

@@ -9,7 +9,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  padding: clamp(36px, 5vw, 64px) 0 84px;
+  padding: clamp(20px, 3.5vw, 44px) 0 clamp(64px, 6vw, 96px);
   isolation: isolate;
   background:
     radial-gradient(circle at top left, hsla(192, 92%, 52%, 0.08), transparent 30%),
@@ -276,37 +276,33 @@
    RESPONSIVE
    ═══════════════════════════════════════════════════════════════════ */
 
+@media (max-width: 1440px) {
+  .pokeball-sticker-wrapper,
+  .pixel-sprite {
+    opacity: 0.85;
+    transform: scale(0.85);
+  }
+}
+
+@media (max-width: 1200px) {
+  .pokeball-sticker-wrapper,
+  .car-sticker-wrapper,
+  .pixel-sprite,
+  .minecraft-block {
+    display: none;
+  }
+}
+
 @media (max-width: 900px) {
   .profile-hero {
     min-height: auto;
-    padding: 30px 0 70px;
+    padding: 24px 0 60px;
   }
 
   .hero-content {
     flex-direction: column;
-    gap: 24px;
-    padding: 0 18px;
-  }
-
-  .pixel-sprite {
-    top: 10%;
-    right: 4%;
-    width: 54px;
-    height: 54px;
-  }
-
-  .minecraft-block {
-    right: 4%;
-    bottom: 8%;
-    width: 56px;
-    height: 56px;
-  }
-
-  .race-car {
-    left: 4%;
-    bottom: 6%;
-    width: 80px;
-    height: 24px;
+    gap: 20px;
+    padding: 0 16px;
   }
 
   .hero-left {
@@ -317,7 +313,7 @@
 
 @media (max-width: 640px) {
   .hero-content {
-    gap: 20px;
+    gap: 16px;
     padding: 0 12px;
   }
 

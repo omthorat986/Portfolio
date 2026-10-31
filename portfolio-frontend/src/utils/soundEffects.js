@@ -136,6 +136,81 @@ class SoundManager {
       void 0;
     }
   }
+
+  playWeaponSwitch() {
+    if (this.muted) return;
+    try {
+      this.init();
+      if (!this.ctx) return;
+      this.playTone(520, 0.04, 'triangle', 0.06);
+      setTimeout(() => this.playTone(780, 0.05, 'square', 0.07), 40);
+      setTimeout(() => this.playTone(1040, 0.06, 'sawtooth', 0.05), 80);
+    } catch {
+      void 0;
+    }
+  }
+
+  playLaser() {
+    if (this.muted) return;
+    try {
+      this.init();
+      if (!this.ctx) return;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(1400, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(120, this.ctx.currentTime + 0.18);
+      gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.18);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.18);
+    } catch {
+      void 0;
+    }
+  }
+
+  playRadarPing() {
+    if (this.muted) return;
+    try {
+      this.init();
+      if (!this.ctx) return;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(1250, this.ctx.currentTime);
+      gain.gain.setValueAtTime(0.09, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.35);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.35);
+    } catch {
+      void 0;
+    }
+  }
+
+  playOverdriveTurbo() {
+    if (this.muted) return;
+    try {
+      this.init();
+      if (!this.ctx) return;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(220, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(880, this.ctx.currentTime + 0.25);
+      gain.gain.setValueAtTime(0.09, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.25);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.25);
+    } catch {
+      void 0;
+    }
+  }
 }
 
 export const sounds = new SoundManager();

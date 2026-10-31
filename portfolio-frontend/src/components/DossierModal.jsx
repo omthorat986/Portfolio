@@ -29,7 +29,7 @@ export default function DossierModal({ onClose, onToast }) {
       <div className="dossier-modal-card shadow-2xl" onClick={(e) => e.stopPropagation()}>
         <header className="dossier-header">
           <div className="dossier-header-left">
-            <span className="dossier-stamp">TOP SECRET // CLASSIFIED</span>
+            <span className="dossier-stamp">DEVELOPER RESUME // DOSSIER</span>
             <span className="dossier-clearance">{dossierData.clearanceLevel}</span>
           </div>
           <button className="dossier-close-btn" onClick={() => { sounds.playClick(); onClose(); }} title="Close (Esc)">
@@ -54,7 +54,7 @@ export default function DossierModal({ onClose, onToast }) {
 
           {/* Dossier Executive Summary */}
           <div className="dossier-section">
-            <h3 className="dossier-heading">[ SECTION 01: AGENT BRIEFING ]</h3>
+            <h3 className="dossier-heading">[ SECTION 01: PROFESSIONAL PROFILE ]</h3>
             <p className="dossier-text">{dossierData.summary}</p>
           </div>
 
@@ -72,7 +72,7 @@ export default function DossierModal({ onClose, onToast }) {
 
           {/* Timeline Experience */}
           <div className="dossier-section">
-            <h3 className="dossier-heading">[ SECTION 03: MISSION TIMELINE / EXPERIENCE ]</h3>
+            <h3 className="dossier-heading">[ SECTION 03: EXPERIENCE &amp; PROJECT HISTORY ]</h3>
             <div className="dossier-timeline">
               {dossierData.experience.map((exp, idx) => (
                 <div key={idx} className="timeline-node">
@@ -115,7 +115,7 @@ export default function DossierModal({ onClose, onToast }) {
             </button>
           </div>
           <button className="dossier-btn dossier-btn-ghost" onClick={() => { sounds.playClick(); onClose(); }}>
-            Exit Dossier
+            Close Profile
           </button>
         </footer>
       </div>

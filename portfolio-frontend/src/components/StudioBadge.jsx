@@ -28,8 +28,8 @@ export default function StudioBadge({ onOpenDossier }) {
       {/* Front Face */}
       <div className="badge-face badge-front">
         <div className="badge-header">
-          <span className="badge-logo">🎮 INDIE.DEV</span>
-          <span className="badge-status-pill">STAFF ACCESS</span>
+          <span className="badge-logo">🎮 OM THORAT</span>
+          <span className="badge-status-pill">DEV PORTFOLIO</span>
         </div>
 
         <div className="badge-photo-container">
@@ -59,22 +59,22 @@ export default function StudioBadge({ onOpenDossier }) {
         </div>
       </div>
 
-      {/* Back Face (Security Clearance Card) */}
+      {/* Back Face (Personal Developer Credentials Card) */}
       <div className="badge-face badge-back">
         <div className="badge-header badge-header-back">
-          <span>SECURITY CLEARANCE</span>
-          <span>DEV // 02</span>
+          <span>DEVELOPER PASS</span>
+          <span>GAME SYSTEMS</span>
         </div>
 
         <div className="badge-back-content">
           <div className="badge-chip-sim" />
           <h4 className="badge-back-name">{personal.fullName}</h4>
-          <p className="badge-back-sub">VERIFIED GAME DEVELOPER</p>
+          <p className="badge-back-sub">PERSONAL GAME DEVELOPER PORTFOLIO</p>
 
           <div className="badge-back-specs">
             <div><span>Primary Stack:</span> C++, C#, Unity</div>
-            <div><span>Specialty:</span> Physics &amp; Gameplay</div>
-            <div><span>Clearance:</span> Active // High</div>
+            <div><span>Specialty:</span> Physics &amp; Gameplay Systems</div>
+            <div><span>Status:</span> Available For Hire</div>
           </div>
 
           {onOpenDossier && (
@@ -86,13 +86,13 @@ export default function StudioBadge({ onOpenDossier }) {
                 onOpenDossier();
               }}
             >
-              📂 OPEN FULL DOSSIER
+              📂 OPEN FULL RESUME &amp; DOSSIER
             </button>
           )}
         </div>
 
         <div className="badge-footer badge-footer-back">
-          <p>PROPERTY OF GAME DEV LABS &bull; RETURN IF FOUND</p>
+          <p>OM THORAT &bull; PERSONAL PORTFOLIO &bull; GAME DEVELOPER</p>
         </div>
       </div>
     </article>
