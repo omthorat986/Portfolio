@@ -180,7 +180,7 @@ function App() {
           title="Jump to Top"
         >
           <span className="nav-logo-icon">🎮</span>
-          <span className="nav-logo-text">{personal.brandName}</span>
+          <span className="nav-logo-text">{personal.name}</span>
           <span className="nav-role-badge">DEV</span>
         </button>
 
@@ -311,7 +311,7 @@ function App() {
           </div>
 
           <p className="footer-brand">
-            🎮 {personal.brandName} &mdash; {personal.title}
+            🎮 {personal.fullName} &mdash; {personal.title}
           </p>
 
           <p className="footer-quote">
